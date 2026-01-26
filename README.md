@@ -15,59 +15,18 @@
 
 ---
 
-## 📋 Daftar Isi
-
-- [Tentang Proyek](#-tentang-proyek)
-- [Fitur Utama](#-fitur-utama)
-- [Teknologi](#-teknologi)
-- [Arsitektur](#-arsitektur)
-- [Instalasi](#-instalasi)
-- [Penggunaan](#-penggunaan)
-- [Struktur Proyek](#-struktur-proyek)
-- [API Documentation](#-api-documentation)
-- [Kontribusi](#-kontribusi)
-- [Lisensi](#-lisensi)
-
 ---
 
 ## 🎯 Tentang Proyek
 
 **TeaLinuxOS Web Platform** adalah aplikasi web full-stack yang dirancang untuk mendukung distribusi Linux TeaLinuxOS. Platform ini menyediakan antarmuka modern untuk download ISO, manajemen pengguna, dan administrasi konten.
 
-### Tujuan Proyek
 
-- 🎨 Menyediakan landing page yang menarik dan modern untuk TeaLinuxOS
-- 📥 Memudahkan pengguna untuk mengunduh berbagai edisi TeaLinuxOS
-- 👥 Sistem autentikasi dan manajemen pengguna
-- 🛠️ Panel admin untuk mengelola konten dan pengguna
-- 🚀 Performa tinggi dengan smooth scrolling dan animasi premium
+
+
 
 ---
 
-## ✨ Fitur Utama
-
-### Frontend
-- ✅ **Modern UI/UX** - Desain premium dengan Tailwind CSS 4
-- ✅ **Smooth Scrolling** - Implementasi Lenis untuk pengalaman scrolling yang halus
-- ✅ **Animasi GSAP** - Animasi interaktif menggunakan GSAP
-- ✅ **Responsive Design** - Tampilan optimal di semua perangkat
-- ✅ **Download Page** - Halaman download dengan informasi lengkap untuk setiap edisi
-- ✅ **Admin Dashboard** - Panel administrasi untuk manajemen konten
-- ✅ **Authentication** - Login dan registrasi pengguna
-- ✅ **Dark Mode** - Tema gelap yang elegan
-
-### Backend
-- ✅ **RESTful API** - API yang terstruktur dengan Go Fiber
-- ✅ **JWT Authentication** - Sistem autentikasi berbasis token
-- ✅ **OAuth2 Integration** - Login dengan Google dan GitHub
-- ✅ **Role-Based Access Control** - Sistem role user dan admin
-- ✅ **PostgreSQL Database** - Database relasional yang robust
-- ✅ **GORM ORM** - Object-Relational Mapping untuk Go
-- ✅ **Middleware** - CORS, JWT verification, dan role checking
-
----
-
-## 🛠️ Teknologi
 
 ### Frontend Stack
 | Teknologi | Versi | Deskripsi |
@@ -93,7 +52,7 @@
 
 ---
 
-## 🏗️ Arsitektur
+##  Arsitektur
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -140,7 +99,7 @@
 
 ---
 
-## 📦 Instalasi
+##  Instalasi
 
 ### Prasyarat
 
@@ -311,124 +270,11 @@ web-tealinux-astro/
 
 ---
 
-## 📚 API Documentation
 
-### Authentication Endpoints
 
-#### Register
-```http
-POST /api/auth/register
-Content-Type: application/json
 
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
 
-#### Login
-```http
-POST /api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
-
-#### OAuth Login
-```http
-GET /api/auth/google
-GET /api/auth/github
-```
-
-### User Endpoints (Protected)
-
-#### Get Current User
-```http
-GET /api/users/me
-Authorization: Bearer <token>
-```
-
-#### Update Profile
-```http
-PUT /api/users/me
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "John Updated"
-}
-```
-
-### Admin Endpoints (Admin Only)
-
-#### Get All Users
-```http
-GET /api/admin/users
-Authorization: Bearer <admin_token>
-```
-
-#### Delete User
-```http
-DELETE /api/admin/users/:id
-Authorization: Bearer <admin_token>
-```
-
-#### Get All Categories
-```http
-GET /api/admin/categories
-Authorization: Bearer <admin_token>
-```
-
-#### Create Category
-```http
-POST /api/admin/categories
-Authorization: Bearer <admin_token>
-Content-Type: application/json
-
-{
-  "name": "Desktop Environment",
-  "description": "Category for desktop environments"
-}
-```
-
----
-
-## 🎨 Fitur Frontend
-
-### Smooth Scrolling
-Proyek ini menggunakan **Lenis** untuk smooth scrolling yang premium:
-
-```javascript
-// Konfigurasi di Layout.astro
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-});
-```
-
-### Animasi GSAP
-Animasi interaktif menggunakan GSAP dan ScrollTrigger:
-
-```javascript
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-```
-
-### Komponen Atomic Design
-Struktur komponen mengikuti prinsip Atomic Design:
-- **Atoms**: Button, Input, Icon
-- **Molecules**: Card, Form Field, Navigation Item
-- **Organisms**: Navbar, Footer, Sidebar, Tables
-
----
-
+``
 ## 🔐 Environment Variables
 
 ### Backend (.env)
@@ -514,46 +360,3 @@ Kami sangat menghargai kontribusi dari komunitas! Berikut cara berkontribusi:
   - `style:` untuk formatting
   - `refactor:` untuk refactoring
   - `test:` untuk testing
-
----
-
-## 📝 Roadmap
-
-- [ ] Implementasi forum komunitas
-- [ ] Sistem notifikasi real-time
-- [ ] Multi-language support (i18n)
-- [ ] Download statistics dan analytics
-- [ ] Blog/News section
-- [ ] Package repository integration
-- [ ] User profile customization
-- [ ] Dark/Light theme toggle
-
----
-
-## 📄 Lisensi
-
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).
-
----
-
-## 👥 Tim
-
-Dikembangkan dengan ❤️ oleh tim **DOSCOM** (Dinus Open Source Community)
-
----
-
-## 📞 Kontak
-
-- **Website**: [tealinuxos.org](https://tealinuxos.org)
-- **Email**: contact@tealinuxos.org
-- **GitHub**: [@doscom](https://github.com/doscom)
-
----
-
-<div align="center">
-
-**⭐ Jangan lupa beri bintang jika proyek ini membantu! ⭐**
-
-Made with 🍵 by DOSCOM
-
-</div>
