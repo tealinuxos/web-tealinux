@@ -1,0 +1,49 @@
+---
+import AdminLayout from "../../components/templates/AdminLayout.astro"
+import StatCard from "../../components/molecules/StatCard.astro"
+---
+
+<AdminLayout>
+  <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+    <StatCard title="Users" value="-" id="stat-users" />
+    <StatCard title="Topics" value="-" id="stat-topics" />
+    <StatCard title="Categories" value="-" id="stat-categories" />
+  </div>
+</AdminLayout>
+
+<script is:inline>
+  {
+    const API_URL = 'http://localhost:3000/api/admin/dashboard';
+    const token = localStorage.getItem('access_token');
+
+    if (!token) {
+      window.location.href = '/login';
+    }
+
+    async function fetchStats() {
+      try {
+        const res = await fetch(API_URL, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!res.ok) {
+            if(res.status === 401) window.location.href = '/login';
+            throw new Error('Failed to fetch stats');
+        }
+        const data = await res.json();
+        
+        document.querySelector('#stat-users p').textContent = data.users;
+        document.querySelector('#stat-topics p').textContent = data.topics;
+        document.querySelector('#stat-categories p').textContent = data.categories;
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchStats();
+  }
+</script>

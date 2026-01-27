@@ -1,0 +1,261 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/organisms/Navbar.astro';
+import EditionCard from '../components/molecules/EditionCard.astro';
+import Footer from '../components/organisms/Footer.astro';
+---
+
+<Layout title="Download TeaLinuxOS - Choose Your Edition">
+	<main class="min-h-screen bg-black text-slate-50 font-sans flow-root relative overflow-hidden">
+		<!-- Optimized Gradient Blobs -->
+		<div class="absolute z-0 pointer-events-none blur-[100px] opacity-50 will-change-transform -top-[15%] -left-[10%] w-[600px] h-[600px] animate-[float-morph_20s_ease-in-out_infinite_alternate]"
+			 style="background: radial-gradient(circle at center, rgba(84, 205, 76, 0.6), transparent); border-radius: 50%;">
+		</div>
+		<div class="absolute z-0 pointer-events-none blur-[100px] opacity-40 will-change-transform top-[40%] -right-[10%] w-[700px] h-[700px] animate-[float-morph_25s_ease-in-out_infinite_alternate-reverse]"
+			 style="background: radial-gradient(circle at center, rgba(84, 205, 76, 0.5), transparent); border-radius: 50%;">
+		</div>
+
+		<div class="relative z-[1]">
+			<Navbar />
+
+			<header class="relative py-[80px] px-[5%] text-center max-w-[900px]  mx-auto">
+
+				<div class="flex justify-center mb-6">
+					<div class="w-16 h-16 flex items-center justify-center">
+						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+						</svg>
+					</div>
+				</div>
+
+				<h1 class="text-4xl md:text-6xl font-black mb-6 text-[#54CD4C]">
+					Download TeaLinuxOS
+				</h1>
+				<p class="text-lg text-white font-medium max-w-2xl mx-auto opacity-90">
+					Choose your edition and experience the delight of an open-source creation
+				</p>
+			</header>
+
+			<section class="relative py-12 px-[5%] max-w-[1200px] mx-auto">
+
+				<div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+					<!-- COSMIC -->
+					<EditionCard class="min-h-[478px] w-full max-w-[448px] justify-center items-center">
+						
+
+						<div class="text-center space-y-2 w-full">
+							<h3 class="text-2xl font-bold text-white">COSMIC Edition</h3>
+							<div class="inline-block px-4 py-1 rounded-full bg-[#54CD4C] text-black text-xs font-bold">
+								Wayland
+							</div>
+						</div>
+
+						<div class="space-y-2 text-sm text-slate-200 w-full px-4">
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+								<span>Base: Arch Linux</span>
+							</div>
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+								<span>Kernel: 6.25.2</span>
+							</div>
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+								<span>Released: June 14, 2025</span>
+							</div>
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+								<span>Size: ~1.9 GiB</span>
+							</div>
+						</div>
+
+						<div class="p-4 rounded-xl border border-white/20 bg-black/20 w-[calc(100%-2rem)]">
+							<p class="text-xs font-bold text-white uppercase tracking-wider mb-2">Features:</p>
+							<ul class="space-y-1">
+								<li class="text-xs text-slate-300 flex items-start gap-2">
+									<span class="text-[#54CD4C] mt-1.5 w-1 h-1 rounded-full bg-[#54CD4C] shrink-0"></span>
+									Wayland by default
+								</li>
+								<li class="text-xs text-slate-300 flex items-start gap-2">
+									<span class="text-[#54CD4C] mt-1.5 w-1 h-1 rounded-full bg-[#54CD4C] shrink-0"></span>
+									Clean COSMIC desktop
+								</li>
+								<li class="text-xs text-slate-300 flex items-start gap-2">
+									<span class="text-[#54CD4C] mt-1.5 w-1 h-1 rounded-full bg-[#54CD4C] shrink-0"></span>
+									Fast performance
+								</li>
+							</ul>
+						</div>
+
+						<div class="flex flex-col gap-4 w-full px-4 mt-auto">
+							<a href="#" class="group relative overflow-hidden flex h-[42px] w-full justify-center items-center gap-2 rounded-full bg-[#54CD4C] hover:bg-[#45b83f] hover:shadow-[0_0_20px_rgba(84,205,76,0.4)] transition-all">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+								</svg>
+								<span class="relative text-black text-[14px] font-bold">Download COSMIC</span>
+							</a>
+						</div>
+					</EditionCard>
+
+					<!-- PLASMA -->
+					<EditionCard class="min-h-[478px] w-full max-w-[448px] justify-center items-center">
+						
+
+						<div class="text-center space-y-2 w-full">
+							<h3 class="text-2xl font-bold text-white">PLASMA Edition</h3>
+							<div class="inline-block px-4 py-1 rounded-full bg-[#54CD4C] text-black text-xs font-bold">
+								KDE Plasma 6
+							</div>
+						</div>
+
+						<div class="space-y-2 text-sm text-slate-200 w-full px-4">
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+								<span>Base: Arch Linux</span>
+							</div>
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+								<span>Kernel: 6.25.2</span>
+							</div>
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+								<span>Released: June 14, 2025</span>
+							</div>
+							<div class="flex items-center gap-3">
+								<svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+								<span>Size: ~2.0 GiB</span>
+							</div>
+						</div>
+
+						<div class="p-4 rounded-xl border border-white/20 bg-black/20 w-[calc(100%-2rem)]">
+							<p class="text-xs font-bold text-white uppercase tracking-wider mb-2">Features:</p>
+							<ul class="space-y-1">
+								<li class="text-xs text-slate-300 flex items-start gap-2">
+									<span class="text-[#54CD4C] mt-1.5 w-1 h-1 rounded-full bg-[#54CD4C] shrink-0"></span>
+									KDE Plasma 6
+								</li>
+								<li class="text-xs text-slate-300 flex items-start gap-2">
+									<span class="text-[#54CD4C] mt-1.5 w-1 h-1 rounded-full bg-[#54CD4C] shrink-0"></span>
+									Full customization support
+								</li>
+								<li class="text-xs text-slate-300 flex items-start gap-2">
+									<span class="text-[#54CD4C] mt-1.5 w-1 h-1 rounded-full bg-[#54CD4C] shrink-0"></span>
+									Beautiful, user-friendly interface
+								</li>
+							</ul>
+						</div>
+
+						<div class="flex flex-col gap-4 w-full px-4 mt-auto">
+							<a href="#" class="group relative overflow-hidden flex h-[42px] w-full justify-center items-center gap-2 rounded-full bg-[#54CD4C] hover:bg-[#45b83f] hover:shadow-[0_0_20px_rgba(84,205,76,0.4)] transition-all">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+								</svg>
+								<span class="relative text-black text-[14px] font-bold">Download PLASMA</span>
+							</a>
+						</div>
+				</div>
+			</section>
+
+			<!-- How to Install Section -->
+			<section class="relative py-12 px-[5%] flex flex-col items-center">
+			<h2 class="text-3xl md:text-4xl font-bold p-2 text-white mb-3">
+				How to Install
+				<span class="inline-block relative">
+				<svg class="absolute inset-0 w-full h-full" viewBox="0 0 159 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+					<path d="M8.08859 2.75138C8.62801 1.10969 10.1607 0 11.8887 0H154.27C156.899 0 158.813 2.49208 158.135 5.03172L151.728 29.0317C151.261 30.7822 149.675 32 147.863 32H4.00301C1.28 32 -0.647121 29.3383 0.202877 26.7514L8.08859 2.75138Z" fill="#54CD4C"/>
+				</svg>
+				<span class="relative z-10 px-4 py-1 text-black font-bold">TeaLinux </span>
+				</span>
+			</h2>
+
+				<EditionCard class="w-full max-w-[918px] min-h-[186px] !p-0 flex-row justify-between items-center bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-xl border border-white/10 overflow-hidden hidden md:flex hover:!border-white/10 hover:!shadow-none hover:!scale-100 transition-none">
+					<!-- Step 1 -->
+					<div class="flex-1 h-full flex flex-col justify-center items-center text-center p-6 border-r border-white/10 relative">
+						<div class="w-12 h-12 rounded-full bg-[#54CD4C] flex items-center justify-center mb-4 text-black shadow-[0_0_15px_rgba(84,205,76,0.4)]">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+						</div>
+						<h3 class="text-white font-bold mb-2">1. Create Bootable Media</h3>
+						<p class="text-xs text-slate-300 leading-relaxed max-w-[200px]">
+							Create a bootable USB drive using your favorite tool, such as Etcher
+						</p>
+					</div>
+
+					<!-- Step 2 -->
+					<div class="flex-1 h-full flex flex-col justify-center items-center text-center p-6 border-r border-white/10 relative">
+						<div class="w-12 h-12 rounded-full bg-[#54CD4C] flex items-center justify-center mb-4 text-black shadow-[0_0_15px_rgba(84,205,76,0.4)]">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+						</div>
+						<h3 class="text-white font-bold mb-2">2. Boot into Live Session</h3>
+						<p class="text-xs text-slate-300 leading-relaxed max-w-[200px]">
+							Try TeaLinuxOS without installing it to your system
+						</p>
+					</div>
+
+					<!-- Step 3 -->
+					<div class="flex-1 h-full flex flex-col justify-center items-center text-center p-6 relative">
+						<div class="w-12 h-12 rounded-full bg-[#54CD4C] flex items-center justify-center mb-4 text-black shadow-[0_0_15px_rgba(84,205,76,0.4)]">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+						</div>
+						<h3 class="text-white font-bold mb-2">3. Install to Disk</h3>
+						<p class="text-xs text-slate-300 leading-relaxed max-w-[200px]">
+							Follow the guided installer to set up TeaLinuxOS
+						</p>
+					</div>
+				</EditionCard>
+
+				<!-- Mobile Version (Vertical Stack) -->
+				<div class="flex flex-col gap-4 w-full md:hidden">
+					<EditionCard class="w-full p-6 flex flex-col items-center text-center">
+						<div class="w-12 h-12 rounded-full bg-[#54CD4C] flex items-center justify-center mb-4 text-black">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+						</div>
+						<h3 class="text-white font-bold mb-2">1. Create Bootable Media</h3>
+						<p class="text-sm text-slate-300">Use Rufus or Balena Etcher to create a bootable USB drive</p>
+					</EditionCard>
+					<EditionCard class="w-full p-6 flex flex-col items-center text-center">
+						<div class="w-12 h-12 rounded-full bg-[#54CD4C] flex items-center justify-center mb-4 text-black">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+						</div>
+						<h3 class="text-white font-bold mb-2">2. Boot into Live Session</h3>
+						<p class="text-sm text-slate-300">Try TeaLinuxOS without installing it to your system</p>
+					</EditionCard>
+					<EditionCard class="w-full p-6 flex flex-col items-center text-center">
+						<div class="w-12 h-12 rounded-full bg-[#54CD4C] flex items-center justify-center mb-4 text-black">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+						</div>
+						<h3 class="text-white font-bold mb-2">3. Install to Disk</h3>
+						<p class="text-sm text-slate-300">Follow the guided installer to set up TeaLinuxOS</p>
+					</EditionCard>
+				</div>
+
+				<a href="/docs/installation" class="mt-10 flex items-center gap-3 px-6 py-3 rounded-full bg-white text-black font-bold hover:bg-slate-200 transition-all group">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+					View Full Installation Guide
+				</a>
+			</section>
+
+			<!-- Support The Project Section -->
+			<section class="relative py-24 px-[5%] flex flex-col items-center text-center">
+				<h2 class="text-3xl md:text-4xl font-bold text-[#54CD4C] mb-4">
+					Support The Project
+				</h2>
+				<p class="text-slate-300 text-lg max-w-2xl mb-10">
+					Help us improve TeaLinuxOS by contributing to our open-source community.
+				</p>
+
+				<div class="flex flex-col sm:flex-row gap-6 w-full justify-center">
+					<a href="https://github.com/tealinuxos" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-black font-bold hover:bg-slate-200 transition-all">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+						Contribute On GitHub
+					</a>
+					<a href="#" class="flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#54CD4C] text-black font-bold hover:bg-[#45b83f] transition-all">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+						Join Our Community
+					</a>
+				</div>
+			</section>
+
+			<Footer />
+		</div>
+	</main>
+</Layout>

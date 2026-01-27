@@ -1,0 +1,35 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<aside class="bg-slate-800 border-r border-slate-700 p-5 h-full min-h-screen">
+  <div class="mb-8">
+    <h1 class="text-xl font-bold text-white">TeaLinux Admin</h1>
+  </div>
+  <ul class="space-y-2">
+    <li>
+      <a href="/admin" class:list={[
+        "block p-2.5 rounded-lg transition-colors",
+        currentPath === "/admin" ? "bg-green-500/10 text-green-500" : "text-slate-400 hover:bg-green-500/10 hover:text-green-500"
+      ]}>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="/admin/users" class:list={[
+        "block p-2.5 rounded-lg transition-colors",
+        currentPath.includes("/admin/users") ? "bg-green-500/10 text-green-500" : "text-slate-400 hover:bg-green-500/10 hover:text-green-500"
+      ]}>
+        Users
+      </a>
+    </li>
+    <li>
+      <a href="/admin/categories" class:list={[
+        "block p-2.5 rounded-lg transition-colors",
+        currentPath.includes("/admin/categories") ? "bg-green-500/10 text-green-500" : "text-slate-400 hover:bg-green-500/10 hover:text-green-500"
+      ]}>
+        Categories
+      </a>
+    </li>
+  </ul>
+</aside>

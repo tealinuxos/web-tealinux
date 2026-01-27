@@ -1,0 +1,327 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/organisms/Navbar.astro';
+import Footer from '../../components/organisms/Footer.astro';
+import ForumSidebar from '../../components/organisms/ForumSidebar.astro';
+---
+
+<Layout title="Forum - TeaLinuxOS Community">
+	<main class="min-h-screen bg-black text-slate-50 font-sans relative overflow-hidden">
+		<!-- Gradient Blobs -->
+		<div class="absolute z-0 pointer-events-none blur-[100px] opacity-50 -top-[15%] -left-[10%] w-[600px] h-[600px] animate-[float-morph_20s_ease-in-out_infinite_alternate]"
+			style="background: radial-gradient(circle at center, rgba(84, 205, 76, 0.6), transparent); border-radius: 50%;">
+		</div>
+		<div class="absolute z-0 pointer-events-none blur-[100px] opacity-40 top-[40%] -right-[10%] w-[700px] h-[700px] animate-[float-morph_25s_ease-in-out_infinite_alternate-reverse]"
+			style="background: radial-gradient(circle at center, rgba(84, 205, 76, 0.5), transparent); border-radius: 50%;">
+		</div>
+
+		<div class="relative z-[1]">
+			<Navbar />
+
+			<!-- Forum Header -->
+			<header class="relative py-12 px-[5%] border-b border-white/10">
+				<div class="max-w-[1400px] mx-auto">
+					<div class="flex items-center justify-between flex-wrap gap-4">
+						<div>
+							<h1 class="text-3xl md:text-4xl font-black text-[#54CD4C] mb-2">
+								Community Forum
+							</h1>
+							<p class="text-slate-400">
+								Join the discussion, share knowledge, and connect with the community
+			</p>
+						</div>
+						<a 
+							href="/forum/new"
+							id="desktop-new-topic"
+							class="hidden px-6 py-2.5 bg-[#54CD4C] text-black font-bold rounded-lg hover:bg-[#45b83f] transition-all flex items-center gap-2"
+						>
+							<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+							</svg>
+							New Topic
+						</a>
+					</div>
+				</div>
+			</header>
+
+			<!-- Main Content Area -->
+			<section class="relative py-8 px-[5%]">
+				<div class="max-w-[1400px] mx-auto">
+					<div class="flex flex-col lg:flex-row gap-6">
+						<!-- Sidebar -->
+						<ForumSidebar />
+
+						<!-- Main Content -->
+						<div class="flex-1 min-w-0">
+							<!-- Controls -->
+							<div class="flex items-center justify-between mb-6 flex-wrap gap-4">
+								<h2 class="text-xl font-bold text-white">Recent Discussions</h2>
+								<div class="flex items-center gap-3">
+									<select 
+										id="sort-select"
+										class="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-[#54CD4C]"
+									>
+										<option value="latest">Latest</option>
+										<option value="popular">Popular</option>
+										<option value="replies">Most Replies</option>
+									</select>
+								</div>
+							</div>
+
+							<!-- Thread List -->
+							<div id="threads-container" class="space-y-3">
+								<div class="text-center py-12">
+									<div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#54CD4C]"></div>
+									<p class="mt-4 text-slate-400">Loading discussions...</p>
+								</div>
+							</div>
+
+							<!-- Pagination Placeholder -->
+							<div id="pagination-container" class="mt-8"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<Footer />
+		</div>
+	</main>
+</Layout>
+
+<script>
+	import { getCategories, getTopics } from '../../lib/api';
+	import { isAuthenticated } from '../../lib/auth';
+	import type { Topic } from '../../lib/api';
+
+	let allTopics: Topic[] = [];
+	let categories: any[] = [];
+
+	// Show new topic button if authenticated
+	if (isAuthenticated()) {
+		const btn = document.getElementById('desktop-new-topic');
+		if (btn) btn.classList.remove('hidden');
+	}
+
+	async function loadForumData() {
+		try {
+			// Load categories and topics in parallel
+			[categories, allTopics] = await Promise.all([
+				getCategories(),
+				getTopics()
+			]);
+
+			// Debug logging
+			console.log('Categories loaded:', categories.length);
+			console.log('Topics loaded:', allTopics.length);
+			if (allTopics.length > 0) {
+				console.log('First topic:', allTopics[0]);
+				console.log('First topic has user?', !!allTopics[0].user);
+			}
+
+			// Populate sidebar
+			populateSidebar();
+
+			// Render threads
+			renderThreads(allTopics);
+		} catch (error) {
+			console.error('Failed to load forum:', error);
+			const container = document.getElementById('threads-container');
+			if (container) {
+				container.innerHTML = `
+					<div class="text-center py-12 border border-red-500/20 rounded-xl bg-red-500/5">
+						<p class="text-red-400">Failed to load forum</p>
+						<p class="text-sm text-slate-500 mt-2">${error instanceof Error ? error.message : 'Unknown error'}</p>
+					</div>
+				`;
+			}
+		}
+	}
+
+	function populateSidebar() {
+		// Group topics by category
+		const topicsByCategory = new Map<string, number>();
+		allTopics.forEach(topic => {
+			const catId = topic.category_id;
+			topicsByCategory.set(catId, (topicsByCategory.get(catId) || 0) + 1);
+		});
+
+		// Update category counts
+		const sidebar = document.getElementById('sidebar-categories');
+		if (sidebar && categories.length > 0) {
+			sidebar.innerHTML = categories.map(cat => {
+				const count = topicsByCategory.get(cat.id) || 0;
+				return `
+					<a 
+						href="/forum/category/${cat.slug}"
+						class="flex items-center justify-between p-2.5 rounded-lg transition-colors group hover:bg-white/5 text-slate-300 hover:text-[#54CD4C]"
+					>
+						<span class="text-sm font-medium">${cat.name}</span>
+						<span class="text-xs px-2 py-0.5 rounded-full bg-white/10">
+							${count}
+						</span>
+					</a>
+				`;
+			}).join('');
+		}
+
+		// Update stats
+		const statsContainer = document.getElementById('sidebar-stats');
+		if (statsContainer) {
+			const totalPosts = allTopics.reduce((sum, topic) => sum + (topic.posts?.length || 0), 0);
+			statsContainer.innerHTML = `
+				<div class="flex items-center justify-between text-sm">
+					<span class="text-slate-400">Topics</span>
+					<span class="font-bold text-[#54CD4C]">${allTopics.length}</span>
+				</div>
+				<div class="flex items-center justify-between text-sm">
+					<span class="text-slate-400">Posts</span>
+					<span class="font-bold text-[#54CD4C]">${totalPosts}</span>
+				</div>
+				<div class="flex items-center justify-between text-sm">
+					<span class="text-slate-400">Categories</span>
+					<span class="font-bold text-[#54CD4C]">${categories.length}</span>
+				</div>
+			`;
+		}
+	}
+
+	function renderThreads(topics: Topic[]) {
+		const container = document.getElementById('threads-container');
+		if (!container) return;
+
+		if (topics.length === 0) {
+			container.innerHTML = `
+				<div class="text-center py-12 border border-white/10 rounded-xl bg-white/5">
+					<p class="text-slate-400 mb-4">No topics yet. Be the first to start a discussion!</p>
+					<a href="/forum/new" class="inline-block px-6 py-2 bg-[#54CD4C] text-black font-bold rounded-lg hover:bg-[#45b83f] transition-all">
+						Create Topic
+					</a>
+				</div>
+			`;
+			return;
+		}
+
+		// Render using ThreadListItem component structure
+		container.innerHTML = topics.map(topic => {
+			const postCount = topic.posts?.length || 0;
+			const category = categories.find(c => c.id === topic.category_id);
+			
+			// Calculate time ago
+			const now = new Date();
+			const past = new Date(topic.created_at);
+			const diffMs = now.getTime() - past.getTime();
+			const diffMins = Math.floor(diffMs / 60000);
+			const diffHours = Math.floor(diffMins / 60);
+			const diffDays = Math.floor(diffHours / 24);
+			
+			const timeAgo = diffMins < 60 ? `${diffMins}m ago` : 
+							diffHours < 24 ? `${diffHours}h ago` : 
+							`${diffDays}d ago`;
+
+			// Thread type config
+			const typeConfig: Record<string, { icon: string; color: string }> = {
+				bug: { icon: '🐛', color: 'text-red-400' },
+				question: { icon: '❓', color: 'text-blue-400' },
+				discussion: { icon: '💬', color: 'text-green-400' },
+			};
+			const config = typeConfig[topic.type || 'discussion'] || typeConfig.discussion;
+
+			return `
+				<a 
+					href="/forum/topic/${topic.slug}"
+					class="flex items-start gap-4 p-4 rounded-lg border border-white/5 bg-gradient-to-br from-white/5 to-white/0 hover:border-[#54CD4C]/30 hover:bg-white/5 transition-all group"
+				>
+					<!-- Type Icon -->
+					<div class="shrink-0 text-2xl pt-1">
+						${config.icon}
+					</div>
+
+					<!-- Content -->
+					<div class="flex-1 min-w-0">
+						<!-- Status Badges -->
+						<div class="flex items-center gap-2 mb-1">
+							${topic.is_pinned ? '<span class="text-[#54CD4C] text-xs" title="Pinned">📌</span>' : ''}
+							${topic.is_locked ? '<span class="text-yellow-400 text-xs" title="Locked">🔒</span>' : ''}
+						</div>
+
+						<!-- Title -->
+						<h3 class="text-base font-bold text-white group-hover:text-[#54CD4C] transition-colors mb-1 line-clamp-2">
+							${topic.title}
+						</h3>
+
+						<!-- Metadata -->
+						<div class="flex items-center gap-3 text-xs text-slate-400 flex-wrap">
+							<span class="flex items-center gap-1">
+								<span class="w-5 h-5 rounded-full bg-[#54CD4C]/20 flex items-center justify-center text-[#54CD4C] text-[10px] font-bold">
+									${topic.user?.name ? topic.user.name.charAt(0).toUpperCase() : '?'}
+								</span>
+								${topic.user?.name || 'Unknown'}
+							</span>
+							<span>•</span>
+							<span>${timeAgo}</span>
+							${category ? `
+								<span>•</span>
+								<span class="hover:text-[#54CD4C]" onclick="event.stopPropagation()">${category.name}</span>
+							` : ''}
+						</div>
+					</div>
+
+					<!-- Stats -->
+					<div class="shrink-0 flex flex-col items-end gap-1 text-xs">
+						<div class="flex items-center gap-3 text-slate-400">
+							<span class="flex items-center gap-1" title="Views">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+								</svg>
+								${topic.views}
+							</span>
+							<span class="flex items-center gap-1 font-semibold text-[#54CD4C]" title="Replies">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+								</svg>
+								${postCount}
+							</span>
+						</div>
+					</div>
+				</a>
+			`;
+		}).join('');
+	}
+
+	function sortThreads(sortBy: string) {
+		let sorted = [...allTopics];
+		
+		switch (sortBy) {
+			case 'popular':
+				sorted.sort((a, b) => (b.views || 0) - (a.views || 0));
+				break;
+			case 'replies':
+				sorted.sort((a, b) => (b.posts?.length || 0) - (a.posts?.length || 0));
+				break;
+			case 'latest':
+			default:
+				sorted.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+				break;
+		}
+
+		renderThreads(sorted);
+	}
+
+	// Event listeners
+	const sortSelect = document.getElementById('sort-select');
+	sortSelect?.addEventListener('change', (e) => {
+		const target = e.target as HTMLSelectElement;
+		sortThreads(target.value);
+	});
+
+	// Initialize
+	loadForumData();
+</script>
+
+<style>
+	@keyframes float-morph {
+		0%, 100% { transform: translate(0, 0) scale(1); }
+		50% { transform: translate(50px, 50px) scale(1.1); }
+	}
+</style>

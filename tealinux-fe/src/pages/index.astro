@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/organisms/Navbar.astro';
+import FeatureCard from '../components/molecules/FeatureCard.astro';
+import EditionCard from '../components/molecules/EditionCard.astro';
+import Footer from '../components/organisms/Footer.astro';
+---
+
+<Layout title="TeaLinux Forum - Community Discussion">
+	<main class="min-h-screen bg-black text-slate-50 font-sans flow-root relative overflow-hidden">
+
+
+		<div class="relative z-[1]">
+			<Navbar />
+
+			<header class="relative py-[100px] px-[5%] text-center max-w-[800px] mx-auto">
+				<h1 class="text-4xl md:text-[4rem] font-black leading-[1.1] mb-6">
+					<span class="bg-gradient-to-r from-[#2ecc71] to-[#a8e063] bg-clip-text text-transparent">TeaLinux</span> "Nikmatnya Sebuah Racikan"
+				</h1>
+				<p class="text-xl text-slate-400 mb-10">
+					Discuss, share, and learn about the best Indonesian Linux distribution.
+				</p>
+				<div class="flex justify-center gap-5">
+					<a href="/download" class="flex w-[166px] h-[47px] px-5 py-[14px] flex-col justify-center items-start gap-[10px] shrink-0 rounded-[10px] border-2 border-white/30 bg-[linear-gradient(116deg,rgba(255,255,255,0.40)_2.89%,rgba(255,255,255,0.10)_69.08%)] backdrop-blur-[20px] text-white font-bold no-underline transition-all hover:-translate-y-0.5">
+						Download now
+					</a>
+					<a href="/docs" class="flex w-[166px] h-[47px] px-5 py-[14px] flex-col justify-center items-start gap-[10px] shrink-0 rounded-[10px] border-2 border-white/30 bg-[linear-gradient(116deg,rgba(255,255,255,0.40)_2.89%,rgba(255,255,255,0.10)_69.08%)] backdrop-blur-[20px] text-white font-bold no-underline transition-all hover:-translate-y-0.5">
+						documentation
+					</a>
+				</div>
+			</header>
+
+			<section class="relative flex w-full max-w-[883.515px] flex-col justify-center items-center gap-[14px] my-[60px] px-6 mx-auto">
+
+				<h2 class="text-4xl font-bold text-white mb-2">What is TeaLinuxOS ?</h2>
+				
+				<div class="flex items-center w-full gap-4 my-4">
+					<div class="h-[1px] bg-white/20 flex-1"></div>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" fill="white"/>
+					</svg>
+					<div class="h-[1px] bg-white/20 flex-1"></div>
+				</div>
+
+				<p class="text-center text-lg text-slate-300 mb-4 max-w-3xl">
+					TeaLinuxOS is a community-driven Linux distribution developed by DOSCOM. Built on top of Arch Linux, it offers speed, simplicity, and freedom with a touch of delightful design.
+				</p>
+
+				<div class="flex min-h-[100px] p-8 md:px-[124px] md:py-[38px] justify-center items-center gap-[10px] self-stretch rounded-[15px] border-[5px] border-white/30 bg-[linear-gradient(116deg,rgba(255,255,255,0.40)_2.89%,rgba(255,255,255,0.10)_69.08%)] backdrop-blur-[20px]">
+					<p class="text-white italic text-lg text-center">"Developed collaboratively to empower education and open-source communities."</p>
+				</div>
+			</section>
+
+			<section class="relative py-[60px] px-[5%] max-w-[1080px] mx-auto text-center">
+
+				<h2 class="text-3xl md:text-4xl font-bold text-[#54CD4C] mb-12">Why Choose TeaLinuxOS ?</h2>
+				
+				<div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory md:flex-wrap justify-start md:justify-center gap-6 pb-8 md:pb-0 px-4 md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+					<FeatureCard 
+						title="Lightweight<br>And Fast"
+						description="Optimized performance with minimal resource usage for smooth computing experience."
+						icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>'
+					/>
+					<FeatureCard 
+						title="Modern<br>Desktop"
+						description="Beautiful COSMIC or Plasma desktop environments with cutting-edge design."
+						icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" /></svg>'
+					/>
+					<FeatureCard 
+						title="Developer-<br>Oriented"
+						description="Pre-installed development tools and packages for seamless coding experience."
+						icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>'
+					/>
+					<FeatureCard 
+						title="Easy<br>installation"
+						description="Installer is very easy to new user for quick and hassle-free setup."
+						icon='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>'
+					/>
+				</div>
+			</section>
+
+			<section class="relative w-full max-w-[1152px] mx-auto py-[80px] px-[5%] bg-black text-center">
+
+			<h2 class="text-3xl md:text-4xl font-bold text-white mb-3">
+				Our 
+				<span class="inline-block relative">
+				<svg class="absolute inset-0 w-full h-full" viewBox="0 0 159 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+					<path d="M8.08859 2.75138C8.62801 1.10969 10.1607 0 11.8887 0H154.27C156.899 0 158.813 2.49208 158.135 5.03172L151.728 29.0317C151.261 30.7822 149.675 32 147.863 32H4.00301C1.28 32 -0.647121 29.3383 0.202877 26.7514L8.08859 2.75138Z" fill="#54CD4C"/>
+				</svg>
+				<span class="relative z-10 px-4 py-1 text-black font-bold">Edition</span>
+				</span>
+			</h2>
+
+			<p class="text-white/80 mb-14 text-base">
+				Select the perfect TeaLinuxOS edition for your need
+			</p>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto place-items-center">
+
+				<!-- COSMIC -->
+				<EditionCard>
+					<div class="w-full text-center">
+						<h3 class="text-center text-[24px] font-semibold mb-2">
+							<span class="inline-block relative">
+								<svg class="absolute inset-0 w-full h-full" viewBox="0 0 159 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+									<path d="M8.08859 2.75138C8.62801 1.10969 10.1607 0 11.8887 0H154.27C156.899 0 158.813 2.49208 158.135 5.03172L151.728 29.0317C151.261 30.7822 149.675 32 147.863 32H4.00301C1.28 32 -0.647121 29.3383 0.202877 26.7514L8.08859 2.75138Z" fill="#54CD4C"/>
+								</svg>
+								<span class="relative z-10 px-4 py-1 text-black font-bold">COSMIC</span>
+							</span>
+							<span class="text-white ml-1">Edition</span>
+						</h3>
+						<p class="text-slate-300 text-[15px]">Wayland default, high performance</p>
+					</div>
+
+					<div class="flex h-[42px] px-[20px] justify-center items-center self-stretch rounded-2xl border border-white/10 bg-white/5">
+						<p class="text-slate-300 text-[13px] font-medium text-center">
+							Release: June 14, 2025 | Kernel: 6.25.2
+						</p>
+					</div>
+
+					<button class="flex h-[42px] w-full justify-center items-center gap-2 rounded-2xl bg-[#54CD4C] hover:bg-[#45b83f] transition-all shadow-[0_0_15px_rgba(84,205,76,0.3)]">
+						<svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+							<path d="M12.75 2.75C12.75 2.33516 12.4148 2 12 2C11.5852 2 11.25 2.33516 11.25 2.75V8.43828L9.52969 6.71797C9.23672 6.425 8.76094 6.425 8.46797 6.71797C8.175 7.01094 8.175 7.48672 8.46797 7.77969L11.468 10.7797C11.7609 11.0727 12.2367 11.0727 12.5297 10.7797L15.5297 7.77969C15.8227 7.48672 15.8227 7.01094 15.5297 6.71797C15.2367 6.425 14.7609 6.425 14.468 6.71797L12.75 8.43828V2.75ZM7.5 10.25C6.67266 10.25 6 10.9227 6 11.75V12.5C6 13.3273 6.67266 14 7.5 14H16.5C17.3273 14 18 13.3273 18 12.5V11.75C18 10.9227 17.3273 10.25 16.5 10.25H14.1211L13.0594 11.3117C12.4734 11.8977 11.5242 11.8977 10.9383 11.3117L9.87891 10.25H7.5Z" fill="black"/>
+						</svg>
+						<span class="text-black text-[14px] font-semibold">Download COSMIC</span>
+					</button>
+				</EditionCard>
+
+				<!-- PLASMA -->
+				<EditionCard>
+					<div class="w-full text-center">
+						<h3 class="text-center text-[24px] font-semibold mb-2">
+							<span class="inline-block relative">
+								<svg class="absolute inset-0 w-full h-full" viewBox="0 0 159 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+									<path d="M8.08859 2.75138C8.62801 1.10969 10.1607 0 11.8887 0H154.27C156.899 0 158.813 2.49208 158.135 5.03172L151.728 29.0317C151.261 30.7822 149.675 32 147.863 32H4.00301C1.28 32 -0.647121 29.3383 0.202877 26.7514L8.08859 2.75138Z" fill="#54CD4C"/>
+								</svg>
+								<span class="relative z-10 px-4 py-1 text-black font-bold">PLASMA</span>
+							</span>
+							<span class="text-white ml-1">Edition</span>
+						</h3>
+						<p class="text-slate-300 text-[15px]">KDE Plasma 6, full customization</p>
+					</div>
+
+					<div class="flex h-[42px] px-[20px] justify-center items-center self-stretch rounded-2xl border border-white/10 bg-white/5">
+						<p class="text-slate-300 text-[13px] font-medium text-center">
+							Release: June 14, 2025 | Kernel: 6.25.2
+						</p>
+					</div>
+
+					<button class="flex h-[42px] w-full justify-center items-center gap-2 rounded-2xl bg-[#54CD4C] hover:bg-[#45b83f] transition-all shadow-[0_0_15px_rgba(84,205,76,0.3)]">
+						<svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+							<path d="M12.75 2.75C12.75 2.33516 12.4148 2 12 2C11.5852 2 11.25 2.33516 11.25 2.75V8.43828L9.52969 6.71797C9.23672 6.425 8.76094 6.425 8.46797 6.71797C8.175 7.01094 8.175 7.48672 8.46797 7.77969L11.468 10.7797C11.7609 11.0727 12.2367 11.0727 12.5297 10.7797L15.5297 7.77969C15.8227 7.48672 15.8227 7.01094 15.5297 6.71797C15.2367 6.425 14.7609 6.425 14.468 6.71797L12.75 8.43828V2.75ZM7.5 10.25C6.67266 10.25 6 10.9227 6 11.75V12.5C6 13.3273 6.67266 14 7.5 14H16.5C17.3273 14 18 13.3273 18 12.5V11.75C18 10.9227 17.3273 10.25 16.5 10.25H14.1211L13.0594 11.3117C12.4734 11.8977 11.5242 11.8977 10.9383 11.3117L9.87891 10.25H7.5Z" fill="black"/>
+						</svg>
+						<span class="text-black text-[14px] font-semibold">Download PLASMA</span>
+					</button>
+				</EditionCard>
+
+			</div>
+			</section>
+
+		</div>
+		
+		<Footer />
+	</main>
+</Layout>
+
+

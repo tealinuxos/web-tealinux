@@ -1,0 +1,33 @@
+---
+interface Props {
+	type: 'bug' | 'question' | 'discussion';
+	class?: string;
+}
+
+const { type, class: className } = Astro.props;
+
+const typeConfig = {
+	bug: {
+		label: 'Bug Report',
+		color: 'bg-red-500/20 text-red-400 border-red-500/30',
+	},
+	question: {
+		label: 'Question',
+		color: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+	},
+	discussion: {
+		label: 'Discussion',
+		color: 'bg-green-500/20 text-green-400 border-green-500/30',
+	},
+};
+
+const config = typeConfig[type];
+---
+
+<span class:list={[
+	"px-3 py-1 text-xs font-semibold rounded-full border",
+	config.color,
+	className
+]}>
+	{config.label}
+</span>

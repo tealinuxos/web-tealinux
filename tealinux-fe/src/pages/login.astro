@@ -1,0 +1,337 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Login - TeaLinux Forum">
+	<main>
+		<div class="auth-container">
+			<div class="auth-card">
+				<div class="auth-header">
+					<h1>Welcome Back</h1>
+					<p>Sign in to your TeaLinux account</p>
+				</div>
+				
+				<form id="loginForm">
+					<div class="form-group">
+						<label for="email">Email Address</label>
+						<input type="email" id="email" name="email" placeholder="name@example.com" required />
+					</div>
+					
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" id="password" name="password" placeholder="••••••••" required />
+					</div>
+					
+					<button type="submit" id="submitBtn">
+						<span class="btn-text">Sign In</span>
+						<div class="loader" id="loader"></div>
+					</button>
+				</form>
+
+				<div class="divider">
+					<span>or continue with</span>
+				</div>
+
+				<div class="social-auth">
+					<a href="http://localhost:3000/auth/google" class="social-btn google">
+						<img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" />
+						Google
+					</a>
+					<a href="http://localhost:3000/auth/github" class="social-btn github">
+						<img src="https://www.svgrepo.com/show/35001/github.svg" alt="GitHub" />
+						GitHub
+					</a>
+				</div>
+				
+				<div class="auth-footer">
+					<p>Don't have an account? <a href="/register">Sign up</a></p>
+				</div>
+				
+				<div id="message" class="message"></div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	import { login } from '../lib/api';
+	import { saveAuthData } from '../lib/auth';
+
+	const loginForm = document.getElementById('loginForm') as HTMLFormElement;
+	const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+	const loader = document.getElementById('loader');
+	const message = document.getElementById('message');
+
+	loginForm.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		
+		const formData = new FormData(loginForm);
+		const email = formData.get('email') as string;
+		const password = formData.get('password') as string;
+		
+		// Reset state
+		submitBtn.disabled = true;
+		loader?.classList.add('active');
+		if (message) {
+			message.textContent = '';
+			message.className = 'message';
+		}
+
+		try {
+			const result = await login(email, password);
+			
+			// Save auth data (tokens + user)
+			saveAuthData(
+				{ access_token: result.access_token, refresh_token: result.refresh_token },
+				result.user
+			);
+			
+			if (message) {
+				message.textContent = 'Login successful! Redirecting...';
+				message.classList.add('success');
+			}
+
+			setTimeout(() => {
+				if (result.user.role === 'admin') {
+					window.location.href = '/admin';
+				} else {
+					window.location.href = '/';
+				}
+			}, 1500);
+		} catch (error) {
+			if (message) {
+				message.textContent = error instanceof Error ? error.message : 'Login failed';
+				message.classList.add('error');
+			}
+		} finally {
+			submitBtn.disabled = false;
+			loader?.classList.remove('active');
+		}
+	});
+</script>
+
+<style>
+	:root {
+		--primary: #2ecc71;
+		--primary-dark: #27ae60;
+		--bg: #0f172a;
+		--card-bg: #1e293b;
+		--text: #f8fafc;
+		--text-muted: #94a3b8;
+		--border: #334155;
+		--error: #ef4444;
+		--success: #22c55e;
+	}
+
+	main {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: radial-gradient(circle at top left, #1e293b, #0f172a);
+		font-family: 'Inter', system-ui, sans-serif;
+		color: var(--text);
+	}
+
+	.auth-container {
+		width: 100%;
+		max-width: 420px;
+		padding: 20px;
+	}
+
+	.auth-card {
+		background: var(--card-bg);
+		padding: 40px;
+		border-radius: 24px;
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+		border: 1px solid var(--border);
+		backdrop-filter: blur(10px);
+	}
+
+	.auth-header {
+		text-align: center;
+		margin-bottom: 32px;
+	}
+
+	.auth-header h1 {
+		font-size: 2rem;
+		font-weight: 800;
+		margin-bottom: 8px;
+		background: linear-gradient(to right, #2ecc71, #a8e063);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.auth-header p {
+		color: var(--text-muted);
+		font-size: 0.95rem;
+	}
+
+	.form-group {
+		margin-bottom: 20px;
+	}
+
+	.form-group label {
+		display: block;
+		font-size: 0.875rem;
+		font-weight: 500;
+		margin-bottom: 8px;
+		color: var(--text-muted);
+	}
+
+	.form-group input {
+		width: 100%;
+		padding: 12px 16px;
+		background: #0f172a;
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		color: var(--text);
+		font-size: 1rem;
+		transition: all 0.2s;
+		box-sizing: border-box;
+	}
+
+	.form-group input:focus {
+		outline: none;
+		border-color: var(--primary);
+		box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+	}
+
+	button {
+		width: 100%;
+		padding: 14px;
+		background: var(--primary);
+		color: white;
+		border: none;
+		border-radius: 12px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		margin-top: 10px;
+	}
+
+	button:hover {
+		background: var(--primary-dark);
+		transform: translateY(-1px);
+	}
+
+	button:disabled {
+		opacity: 0.7;
+		cursor: not-allowed;
+	}
+
+	.divider {
+		margin: 24px 0;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		color: var(--text-muted);
+		font-size: 0.875rem;
+	}
+
+	.divider::before,
+	.divider::after {
+		content: '';
+		flex: 1;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.divider span {
+		padding: 0 12px;
+	}
+
+	.social-auth {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+	}
+
+	.social-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		padding: 10px;
+		background: #0f172a;
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		color: var(--text);
+		text-decoration: none;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: all 0.2s;
+	}
+
+	.social-btn:hover {
+		background: #1e293b;
+		border-color: var(--text-muted);
+	}
+
+	.social-btn img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.auth-footer {
+		margin-top: 24px;
+		text-align: center;
+		font-size: 0.875rem;
+		color: var(--text-muted);
+	}
+
+	.auth-footer a {
+		color: var(--primary);
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.auth-footer a:hover {
+		text-decoration: underline;
+	}
+
+	.message {
+		margin-top: 20px;
+		padding: 12px;
+		border-radius: 8px;
+		font-size: 0.875rem;
+		text-align: center;
+		display: none;
+	}
+
+	.message.success {
+		display: block;
+		background: rgba(34, 197, 94, 0.1);
+		color: var(--success);
+		border: 1px solid rgba(34, 197, 94, 0.2);
+	}
+
+	.message.error {
+		display: block;
+		background: rgba(239, 68, 68, 0.1);
+		color: var(--error);
+		border: 1px solid rgba(239, 68, 68, 0.2);
+	}
+
+	.loader {
+		width: 18px;
+		height: 18px;
+		border: 2px solid rgba(255, 255, 255, 0.3);
+		border-radius: 50%;
+		border-top-color: white;
+		animation: spin 0.8s linear infinite;
+		display: none;
+	}
+
+	.loader.active {
+		display: block;
+	}
+
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+</style>

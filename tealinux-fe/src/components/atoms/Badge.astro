@@ -1,0 +1,14 @@
+---
+const { value } = Astro.props
+
+const isUser = value === 'user' || value === 'User';
+const isAdmin = value === 'admin' || value === 'Admin';
+---
+
+<span class:list={[
+  "px-2 py-1 rounded text-xs font-bold",
+  isAdmin && "bg-green-500/20 text-green-500",
+  !isAdmin && "bg-white/10 text-slate-400"
+]}>
+  {value}
+</span>

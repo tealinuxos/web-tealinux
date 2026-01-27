@@ -1,0 +1,136 @@
+---
+interface Category {
+	id: string;
+	name: string;
+	slug: string;
+	description: string;
+	topic_count?: number;
+	post_count?: number;
+}
+
+interface ForumStats {
+	total_topics: number;
+	total_posts: number;
+	total_users: number;
+	latest_user?: string;
+}
+
+interface Props {
+	categories?: Category[];
+	stats?: ForumStats;
+	activeSlug?: string;
+}
+
+const { categories = [], stats, activeSlug } = Astro.props;
+---
+
+<aside class="w-full lg:w-72 space-y-4">
+	<!-- Categories Section -->
+	<div class="p-5 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm">
+		<h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+			<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+			</svg>
+			Categories
+		</h2>
+		<nav class="space-y-1" id="sidebar-categories">
+			{categories.length === 0 ? (
+				<div class="animate-pulse space-y-2">
+					<div class="h-8 bg-white/10 rounded"></div>
+					<div class="h-8 bg-white/10 rounded"></div>
+					<div class="h-8 bg-white/10 rounded"></div>
+				</div>
+			) : (
+				categories.map(cat => (
+					<a 
+						href={`/forum/category/${cat.slug}`}
+						class={`flex items-center justify-between p-2.5 rounded-lg transition-colors group ${
+							activeSlug === cat.slug 
+								? 'bg-[#54CD4C]/20 text-[#54CD4C]' 
+								: 'hover:bg-white/5 text-slate-300 hover:text-[#54CD4C]'
+						}`}
+					>
+						<span class="text-sm font-medium">{cat.name}</span>
+						{cat.topic_count !== undefined && (
+							<span class="text-xs px-2 py-0.5 rounded-full bg-white/10">
+								{cat.topic_count}
+							</span>
+						)}
+					</a>
+				))
+			)}
+		</nav>
+	</div>
+
+	<!-- Forum Stats Section -->
+	<div class="p-5 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm">
+		<h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+			<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+			</svg>
+			Forum Stats
+		</h2>
+		<div class="space-y-3" id="sidebar-stats">
+			{stats ? (
+				<>
+					<div class="flex items-center justify-between text-sm">
+						<span class="text-slate-400">Topics</span>
+						<span class="font-bold text-[#54CD4C]">{stats.total_topics}</span>
+					</div>
+					<div class="flex items-center justify-between text-sm">
+						<span class="text-slate-400">Posts</span>
+						<span class="font-bold text-[#54CD4C]">{stats.total_posts}</span>
+					</div>
+					<div class="flex items-center justify-between text-sm">
+						<span class="text-slate-400">Users</span>
+						<span class="font-bold text-[#54CD4C]">{stats.total_users}</span>
+					</div>
+					{stats.latest_user && (
+						<div class="pt-2 border-t border-white/10">
+							<p class="text-xs text-slate-500">Latest member</p>
+							<p class="text-sm text-white font-medium">{stats.latest_user}</p>
+						</div>
+					)}
+				</>
+			) : (
+				<div class="animate-pulse space-y-2">
+					<div class="h-5 bg-white/10 rounded"></div>
+					<div class="h-5 bg-white/10 rounded"></div>
+					<div class="h-5 bg-white/10 rounded"></div>
+				</div>
+			)}
+		</div>
+	</div>
+
+	<!-- Quick Actions (Mobile) -->
+	<div class="lg:hidden p-4 rounded-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0">
+		<a 
+			href="/forum/new"
+			class="flex items-center justify-center gap-2 w-full px-4 py-2 bg-[#54CD4C] text-black font-bold rounded-lg hover:bg-[#45b83f] transition-all"
+			id="mobile-new-topic"
+		>
+			<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+			</svg>
+			New Topic
+		</a>
+	</div>
+</aside>
+
+<script>
+	import { isAuthenticated } from '../../lib/auth';
+	
+	// Show/hide new topic button based on auth
+	if (!isAuthenticated()) {
+		const mobileBtn = document.getElementById('mobile-new-topic');
+		if (mobileBtn) {
+			mobileBtn.setAttribute('href', '/login');
+			mobileBtn.innerHTML = `
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+				</svg>
+				Login to Post
+			`;
+		}
+	}
+</script>
