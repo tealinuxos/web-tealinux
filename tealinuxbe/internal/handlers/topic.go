@@ -12,7 +12,7 @@ import (
 
 func GetTopics(c *fiber.Ctx) error {
 	var topics []models.Topic
-	query := database.DB.Preload("User").Preload("Category").Preload("Tags").Order("created_at desc")
+	query := database.DB.Preload("User").Preload("Category").Preload("Tags").Preload("Posts").Order("created_at desc")
 
 	if catID := c.Query("category_id"); catID != "" {
 		query = query.Where("category_id = ?", catID)
@@ -27,7 +27,18 @@ func GetTopics(c *fiber.Ctx) error {
 func GetTopic(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var topic models.Topic
-	if err := database.DB.Preload("User").Preload("Category").Preload("Tags").Preload("Posts.User").Where("id = ? OR slug = ?", id, id).First(&topic).Error; err != nil {
+
+	// Check if the parameter is a valid UUID
+	query := database.DB.Preload("User").Preload("Category").Preload("Tags").Preload("Posts.User").Preload("Posts.Likes")
+	if _, err := uuid.Parse(id); err == nil {
+		// It's a valid UUID, search by ID
+		query = query.Where("id = ?", id)
+	} else {
+		// Not a UUID, search by slug
+		query = query.Where("slug = ?", id)
+	}
+
+	if err := query.First(&topic).Error; err != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Topic not found"})
 	}
 

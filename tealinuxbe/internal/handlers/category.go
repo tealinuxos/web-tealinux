@@ -20,7 +20,15 @@ func GetCategories(c *fiber.Ctx) error {
 func GetCategory(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var category models.Category
-	if err := database.DB.Where("id = ? OR slug = ?", id, id).First(&category).Error; err != nil {
+
+	query := database.DB
+	if _, err := uuid.Parse(id); err == nil {
+		query = query.Where("id = ?", id)
+	} else {
+		query = query.Where("slug = ?", id)
+	}
+
+	if err := query.First(&category).Error; err != nil {
 		return c.Status(404).JSON(fiber.Map{"error": "Category not found"})
 	}
 	return c.JSON(category)

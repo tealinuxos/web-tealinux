@@ -24,7 +24,7 @@ func Search(c *fiber.Ctx) error {
 	// database.DB.Where("to_tsvector('english', title) @@ plainto_tsquery(?)", q).Find(&topics)
 
 	// Using ILIKE for broader compatibility and simplicity in this step without setting up TSVECTOR indexes
-	err := database.DB.Preload("User").Preload("Category").
+	err := database.DB.Preload("User").Preload("Category").Preload("Tags").Preload("Posts").
 		Where("title ILIKE ?", "%"+q+"%").
 		Find(&topics).Error
 

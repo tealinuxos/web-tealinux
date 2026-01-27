@@ -62,4 +62,8 @@ func Connect() {
 
 	DB = db
 	log.Println("Database connected & migrated")
+
+	// Seed initial data
+	SeedAdmin()
+	SeedForumCategories()
 }

@@ -41,6 +41,11 @@ func Register(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": "email and password required"})
 	}
 
+	var existingUser models.User
+	if err := database.DB.Where("email = ?", body.Email).First(&existingUser).Error; err == nil {
+		return c.Status(400).JSON(fiber.Map{"error": "email already registered"})
+	}
+
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 14)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "failed to hash password"})

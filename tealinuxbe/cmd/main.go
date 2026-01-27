@@ -20,6 +20,8 @@ func main() {
 
 	database.Connect()
 	database.SeedAdmin()
+	database.SeedForumCategories()
+	database.SeedForumData()
 
 	app := fiber.New(fiber.Config{
 		AppName: "TeaLinux API",
@@ -28,7 +30,7 @@ func main() {
 	app.Use(logger.New())
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:4321",
+		AllowOrigins:     "http://localhost:4321,http://localhost:4322,http://localhost:4323",
 		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		AllowCredentials: true,
