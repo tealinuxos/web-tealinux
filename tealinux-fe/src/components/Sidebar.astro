@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import tealinuxLogo from '../assets/tealinus_ijo.svg';
 
 const docs = await getCollection('docs');
 const pathname = Astro.url.pathname;
@@ -28,14 +29,31 @@ const isActive = (slug: string) => {
 };
 ---
 
-<aside id="docs-sidebar" class="w-64 min-h-screen bg-[#0a0a0a] border-r border-white/10 fixed left-0 top-0 pt-20 overflow-y-auto z-40">
+<aside id="docs-sidebar" class="w-64 min-h-screen bg-[#0a0a0a] border-r border-white/10 fixed left-0 top-0 overflow-y-auto z-40">
   <div class="p-6">
-    <div class="mb-8">
+    <!-- Logo Section -->
+    <div class="mb-6">
       <a href="/docs" class="block">
-        <h2 class="text-[#54CD4C] text-xl font-bold mb-2">TeaLinuxOS</h2>
-        <p class="text-slate-400 text-sm">Documentation</p>
+        <img src={tealinuxLogo.src} alt="TeaLinuxOS" class="h-12 w-auto" />
       </a>
     </div>
+
+    <!-- Search Section -->
+    <div class="mb-6">
+      <div class="relative">
+        <input 
+          type="text" 
+          id="docs-search"
+          placeholder="Search documentation..." 
+          class="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-slate-300 placeholder-slate-500 focus:outline-none focus:border-[#54CD4C] focus:ring-1 focus:ring-[#54CD4C] transition-all"
+        />
+        <svg class="absolute right-3 top-2.5 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Documentation Navigation -->
 
     <nav class="space-y-6">
       {sidebarData.map((section) => (
@@ -64,6 +82,45 @@ const isActive = (slug: string) => {
     </nav>
   </div>
 </aside>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('docs-search') as HTMLInputElement;
+    const sidebar = document.getElementById('docs-sidebar');
+    
+    if (searchInput && sidebar) {
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+        const sections = sidebar.querySelectorAll('nav:last-of-type > div');
+        
+        sections.forEach((section) => {
+          const items = section.querySelectorAll('li');
+          let hasVisibleItems = false;
+          
+          items.forEach((item) => {
+            const link = item.querySelector('a');
+            const text = link?.textContent?.toLowerCase() || '';
+            
+            if (text.includes(searchTerm)) {
+              item.style.display = 'block';
+              hasVisibleItems = true;
+            } else {
+              item.style.display = 'none';
+            }
+          });
+          
+          // Show/hide section based on whether it has visible items
+          const sectionElement = section as HTMLElement;
+          if (hasVisibleItems || searchTerm === '') {
+            sectionElement.style.display = 'block';
+          } else {
+            sectionElement.style.display = 'none';
+          }
+        });
+      });
+    }
+  });
+</script>
 
 <style>
   aside {
