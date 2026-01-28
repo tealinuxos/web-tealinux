@@ -16,7 +16,7 @@ import StatCard from "../../components/molecules/StatCard.astro"
 <script is:inline>
   {
     const API_URL = 'http://localhost:3000/api/admin/dashboard';
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('tealinux_token');
 
     if (!token) {
       window.location.href = '/login';

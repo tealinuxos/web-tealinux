@@ -14,3 +14,4 @@ TeaLinuxOS can be installed in various ways, depending on your needs and prefere
 - [Guide to Install to tealinuxos on](/documentation/dual-boot) Dual Boot (see [Dual Boot](/documentation/84.dual%20boot))
 
 - [Guide to Install to tealinuxos on](/documentation/manual-partition) Manual Partition (see [Manual Partition](/documentation/85.Manual%20Partition))
+

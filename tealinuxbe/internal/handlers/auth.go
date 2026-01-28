@@ -179,11 +179,21 @@ func GoogleCallback(c *fiber.Ctx) error {
 
 	database.DB.Model(&user).Update("refresh_token", refresh)
 
-	return c.JSON(fiber.Map{
-		"access_token":  access,
-		"refresh_token": refresh,
-		"user":          user,
-	})
+	frontendURL := os.Getenv("FRONTEND_URL")
+	if frontendURL == "" {
+		frontendURL = "http://localhost:4321"
+	}
+
+	redirectURL := frontendURL + "/auth/callback?" +
+		"access_token=" + access +
+		"&refresh_token=" + refresh +
+		"&id=" + utils.UintToString(user.ID) +
+		"&name=" + user.Name +
+		"&email=" + user.Email +
+		"&role=" + user.Role +
+		"&avatar=" + user.Avatar
+
+	return c.Redirect(redirectURL)
 }
 
 func GithubLogin(c *fiber.Ctx) error {
@@ -243,11 +253,21 @@ func GithubCallback(c *fiber.Ctx) error {
 
 	database.DB.Model(&user).Update("refresh_token", refresh)
 
-	return c.JSON(fiber.Map{
-		"access_token":  access,
-		"refresh_token": refresh,
-		"user":          user,
-	})
+	frontendURL := os.Getenv("FRONTEND_URL")
+	if frontendURL == "" {
+		frontendURL = "http://localhost:4321"
+	}
+
+	redirectURL := frontendURL + "/auth/callback?" +
+		"access_token=" + access +
+		"&refresh_token=" + refresh +
+		"&id=" + utils.UintToString(user.ID) +
+		"&name=" + user.Name +
+		"&email=" + user.Email +
+		"&role=" + user.Role +
+		"&avatar=" + user.Avatar
+
+	return c.Redirect(redirectURL)
 }
 
 func RefreshToken(c *fiber.Ctx) error {

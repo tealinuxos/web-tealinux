@@ -13,7 +13,7 @@ const users = []
 <script is:inline>
   {
     const API_URL = 'http://localhost:3000/api/admin/users';
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('tealinux_token');
 
     if (!token) {
       window.location.href = '/login';
@@ -51,22 +51,22 @@ const users = []
       }
 
       tbody.innerHTML = users.map(u => {
-          const isAdmin = u.Role === 'admin' || u.Role === 'Admin';
+          const isAdmin = u.role === 'admin' || u.role === 'Admin';
           const badgeClass = isAdmin ? "bg-green-500/20 text-green-500" : "bg-white/10 text-slate-400";
           
           return `
           <tr class="hover:bg-slate-800/50 transition-colors">
-            <td class="p-3 border-b border-slate-700 text-slate-200">${u.Name}</td>
-            <td class="p-3 border-b border-slate-700 text-slate-200">${u.Email}</td>
+            <td class="p-3 border-b border-slate-700 text-slate-200">${u.name}</td>
+            <td class="p-3 border-b border-slate-700 text-slate-200">${u.email}</td>
             <td class="p-3 border-b border-slate-700">
               <span class="px-2 py-1 rounded text-xs font-bold ${badgeClass}">
-                ${u.Role}
+                ${u.role}
               </span>
             </td>
             <td class="p-3 border-b border-slate-700">
               <button 
                   class="px-3.5 py-1.5 rounded-md text-sm cursor-pointer border-none transition-colors bg-red-500 text-white hover:bg-red-600"
-                  onclick="deleteUser(${u.ID})"
+                  onclick="deleteUser(${u.id})"
               >
                 Delete
               </button>
