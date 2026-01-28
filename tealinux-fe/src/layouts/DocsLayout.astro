@@ -1,0 +1,77 @@
+---
+import Layout from './Layout.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  frontmatter?: any;
+}
+
+const { title, description, frontmatter } = Astro.props;
+const pageTitle = frontmatter?.title || title;
+const pageDescription = frontmatter?.description || description;
+---
+
+<Layout title={`${pageTitle} - TeaLinuxOS Documentation`} description={pageDescription}>
+  <div class="flex min-h-screen bg-black text-slate-50">
+    <Sidebar />
+    
+    <main class="flex-1 ml-0 lg:ml-64">
+      <div class="max-w-4xl mx-auto px-4 lg:px-8 py-12 pt-24">
+        <slot />
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style is:global>
+  /* Documentation prose styling */
+  .prose {
+    color: #e2e8f0;
+    max-width: none;
+  }
+
+  .prose h1 {
+    color: #54CD4C;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .prose h2 {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .prose p {
+    color: #cbd5e1;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+
+  .prose a {
+    color: #54CD4C;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .prose a:hover {
+    text-decoration: underline;
+    color: #45b83f;
+  }
+
+  .prose code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    color: #54CD4C;
+  }
+</style>

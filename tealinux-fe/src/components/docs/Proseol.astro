@@ -1,0 +1,36 @@
+---
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="space-y-3 my-6">
+  {items.map((item) => (
+    <li class="text-slate-300 leading-relaxed pl-2">
+      <span class="text-[#54CD4C] font-semibold mr-2">•</span>
+      {item}
+    </li>
+  ))}
+</ol>
+
+<style>
+  ol {
+    counter-reset: item;
+    list-style-type: none;
+  }
+  
+  li {
+    counter-increment: item;
+    position: relative;
+  }
+  
+  li::before {
+    content: counter(item) ".";
+    color: #54CD4C;
+    font-weight: 600;
+    position: absolute;
+    left: -1.5rem;
+  }
+</style>

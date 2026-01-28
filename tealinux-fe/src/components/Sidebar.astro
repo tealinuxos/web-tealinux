@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('docs');
+const pathname = Astro.url.pathname;
+
+// Grouping logic
+const groups = docs.reduce((acc, doc) => {
+  const category = doc.data.category || 'General';
+  if (!acc[category]) {
+    acc[category] = [];
+  }
+  acc[category].push(doc);
+  return acc;
+}, {} as Record<string, typeof docs>);
+
+// Sorting logic: Sort categories (optional) and items within categories
+const sortedCategories = Object.keys(groups).sort();
+const sidebarData = sortedCategories.map(category => ({
+  title: category,
+  items: groups[category].sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+}));
+
+const isActive = (slug: string) => {
+  const currentPath = pathname.replace(/\/$/, '');
+  const targetPath = `/docs/${slug}`.replace(/\/$/, '');
+  return currentPath === targetPath || (slug === 'index' && currentPath === '/docs');
+};
+---
+
+<aside id="docs-sidebar" class="w-64 min-h-screen bg-[#0a0a0a] border-r border-white/10 fixed left-0 top-0 pt-20 overflow-y-auto z-40">
+  <div class="p-6">
+    <div class="mb-8">
+      <a href="/docs" class="block">
+        <h2 class="text-[#54CD4C] text-xl font-bold mb-2">TeaLinuxOS</h2>
+        <p class="text-slate-400 text-sm">Documentation</p>
+      </a>
+    </div>
+
+    <nav class="space-y-6">
+      {sidebarData.map((section) => (
+        <div>
+          <h3 class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
+            {section.title}
+          </h3>
+          <ul class="space-y-1">
+            {section.items.map((item) => (
+              <li>
+                <a 
+                  href={`/docs/${item.id === 'index' ? '' : item.id}`}
+                  class={`block px-3 py-2 text-sm rounded-lg transition-all ${
+                    isActive(item.id) 
+                      ? 'bg-[#54CD4C]/20 text-[#54CD4C] font-semibold' 
+                      : 'text-slate-300 hover:text-[#54CD4C] hover:bg-white/5'
+                  }`}
+                >
+                  {item.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  </div>
+</aside>
+
+<style>
+  aside {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(84, 205, 76, 0.3) transparent;
+  }
+  
+  aside::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  aside::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  aside::-webkit-scrollbar-thumb {
+    background: rgba(84, 205, 76, 0.3);
+    border-radius: 3px;
+  }
+</style>

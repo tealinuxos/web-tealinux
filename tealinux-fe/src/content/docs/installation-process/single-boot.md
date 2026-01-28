@@ -1,0 +1,38 @@
+---
+title: "Single Boot"
+description: "Single Boot Installation Guide"
+category: "Installation Process"
+order: 3
+---
+
+# Single Boot Installation Guide
+
+This guide will walk you through installing **TeaLinuxOS as the only operating system** on your computer. It’s perfect for users who want a clean system setup with no dual boot or leftover partitions from other OSes.
+
+![Single Boot Preview](/image/singleboot.png)
+
+---
+
+## Steps to Install TeaLinuxOS in Single Boot Mode
+
+1. **Boot from the Installation Media**  
+   Insert your TeaLinuxOS installation USB or DVD and reboot your system.  
+   You may need to access your BIOS/UEFI to set the boot priority so that it loads from the USB or DVD first.
+
+2. **Choose Installation Type**  
+   On the installation screen, select the **"Single Boot"** option.  
+   This will erase all existing data on your selected disk and install TeaLinuxOS as the only OS.
+
+   ![Installation Type Selection](/image/singleboot2.png)
+
+   You’ll also be able to select the file system type here — common choices include:
+
+   - **EXT4**: Stable and widely supported.
+   - **BTRFS**: Modern filesystem with snapshot and rollback support.
+
+3. **Confirm Data Erasure**  
+ The installer will notify you that all data on the disk will be permanently deleted.  
+ Make sure you’ve backed up any important files before continuing.
+<div>
+<Alert type="danger" title="Important !" message="Single boot installation will remove all existing partitions and operating systems on the selected disk. Double-check that you’ve selected the correct drive before proceeding." />
+</div>

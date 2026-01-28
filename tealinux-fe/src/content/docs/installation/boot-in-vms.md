@@ -1,0 +1,44 @@
+---
+title: "Boot in VMs"
+description: "How to boot TeaLinuxOS in Virtual Machines"
+category: "Installation"
+order: 4
+---
+
+# Booting TeaLinuxOS from a VMs
+
+Running TeaLinuxOS in a virtual machine is a convenient way to try or use the system without changing your current OS. For the best experience, we recommend configuring your VM with the following settings:
+
+::table{ :headers='["Settings", "Recommended Value",""]' :rows='[ ["CPU Cores", "2 or more", ""],["Video Memory", "At least 128 MB", ""],["3D Acceleration", "Enabled (Settings > Display > Enable 3D Acceleration)", ""]]'}
+::
+
+## Steps to Boot TeaLinuxOS in a VM
+
+<ol class="list-decimal pl-6 space-y-2">
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+ Create a new virtual machine using your preferred virtualization software (e.g., VirtualBox or VMware).
+  </li>
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+     Set the <strong>Memory (RAM)</strong> to at least <strong>4096 MB</strong>.
+  </li>
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+Assign <strong>2 or more CPU cores</strong> for better performance.
+  </li>
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+    Under <strong>Display settings</strong>:<br/>
+    - Enable <strong>3D Acceleration</strong>.<br/>
+    - Set <strong>Video Memory</strong> to <strong> 128 MB or more</strong>.
+  </li>
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+   Attach the <strong>TeaLinuxOS ISO</strong> as a virtual optical disk.
+  </li>
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+    Start the virtual machine.
+  </li>
+  <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
+    Follow the instructions on the screen to boot into TeaLinuxOS.
+  </li>
+
+<p class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">These settings will ensure a smoother experience, especially when using more visually rich desktop environments like <strong>Cosmic</strong> or <strong>KDE.</strong>
+
+</ol>
