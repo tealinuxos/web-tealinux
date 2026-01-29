@@ -1,6 +1,14 @@
 ---
+interface Props {
+  isFixed?: boolean;
+}
+const { isFixed = true } = Astro.props;
+const wrapperClass = isFixed 
+  ? "fixed top-0 left-0 right-0 z-50 pt-[20px] pb-[10px]" 
+  : "pt-[20px] pb-[10px]";
 ---
-<nav class="relative z-50 flex justify-between items-center w-[90%] max-w-[910px] h-[70px] px-6 md:px-9 py-2.5 rounded-[50px] border-[5px] border-white/30 bg-[linear-gradient(116deg,rgba(255,255,255,0.40)_2.89%,rgba(255,255,255,0.10)_69.08%)] backdrop-blur-[20px] mt-[89px] mx-auto transition-all duration-300">
+<div class={wrapperClass}>
+    <nav class="flex justify-between items-center w-[90%] max-w-[910px] h-[70px] px-6 md:px-9 py-2.5 rounded-[50px] border-[5px] border-white/30 bg-[linear-gradient(116deg,rgba(255,255,255,0.40)_2.89%,rgba(255,255,255,0.10)_69.08%)] backdrop-blur-[20px] mx-auto transition-all duration-300">
     <a href="/" class="flex items-center text-white hover:opacity-90 transition-opacity">
         <svg width="177" height="54" viewBox="0 0 177 54" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-8 md:h-10 w-auto">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9408 48.2576C18.9344 44.2819 16.8308 42.8463 8.59837 36.9934C0.365891 31.1406 0 12.9192 0 12.9192C0 12.9192 5.12243 19.4348 10.4278 21.4226C15.7332 23.4104 19.6664 29.0423 20.0323 32.4657L19.9449 18.7722C19.9449 18.7722 20.4931 13.8028 24.1526 11.7045C27.8115 9.6063 31.1044 6.73516 31.6532 4.41599C31.6532 4.41599 33.2083 13.5819 29.7324 17.9991C26.2564 22.4164 21.4999 23.5207 21.0426 26.0607L20.9552 54L20.0399 53.8945L19.9408 48.2576Z" fill="currentColor"/>
@@ -36,7 +44,7 @@
 </nav>
 
 <!-- Mobile Menu Dropdown -->
-<div id="mobileMenu" class="hidden fixed inset-x-0 top-[170px] mx-auto w-[90%] max-w-[910px] p-4 rounded-2xl border border-white/20 bg-slate-900/90 backdrop-blur-xl z-40 flex-col gap-4 md:hidden">
+<div id="mobileMenu" class="hidden fixed inset-x-0 top-[100px] mx-auto w-[90%] max-w-[910px] p-4 rounded-2xl border border-white/20 bg-slate-900/90 backdrop-blur-xl z-40 flex-col gap-4 md:hidden">
     <a href="/" class="text-white/90 hover:text-white py-2 border-b border-white/10">Home</a>
     <a href="/download" class="text-white/90 hover:text-white py-2 border-b border-white/10">Download</a>
     <a href="/docs" class="text-white/90 hover:text-white py-2 border-b border-white/10">Docs</a>
