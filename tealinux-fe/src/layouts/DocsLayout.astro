@@ -2,6 +2,7 @@
 import Layout from './Layout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Navbar from '../components/organisms/Navbar.astro';
+import SearchModal from '../components/SearchModal.astro';
 
 interface Props {
   title: string;
@@ -15,35 +16,108 @@ const pageDescription = frontmatter?.description || description;
 ---
 
 <Layout title={`${pageTitle} - TeaLinuxOS Documentation`} description={pageDescription}>
-
-
-  <div class="flex min-h-screen bg-black text-slate-50 pt-[100px]">
+  <div class="docs-layout">
     <Sidebar />
     
-    <main class="flex-1 ml-0 lg:ml-64">
-      <div class="max-w-4xl mx-auto px-4 lg:px-8 py-12">
-          <div class="docs-navbar-wrapper">
-            <Navbar isFixed={false} />
-          </div>
-        <slot />
+    <main class="docs-main">
+      <div class="docs-content">
+        <div class="docs-navbar-wrapper">
+          <Navbar isFixed={false} />
+        </div>
+        <article class="prose">
+          <slot />
+        </article>
       </div>
     </main>
   </div>
+
+  <SearchModal />
+
+  <!-- Search trigger button -->
+  <button 
+    onclick="window.openSearchModal()" 
+    class="search-trigger-btn"
+    aria-label="Search documentation"
+  >
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+    </svg>
+    <span>Search</span>
+    <kbd>/</kbd>
+  </button>
 </Layout>
 
 <style is:global>
+  /* Layout structure */
+  .docs-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #000;
+    color: #f8fafc;
+    padding-top: 60px;
+  }
+
+  .docs-main {
+    flex: 1;
+    width: 100%;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+  }
+
+  @media (min-width: 1024px) {
+    .docs-layout {
+      padding-top: 100px;
+    }
+    
+    .docs-main {
+      margin-left: 256px;
+    }
+  }
+
+  .docs-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .docs-content {
+      padding: 2rem 1.5rem 4rem;
+      max-width: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .docs-content {
+      max-width: 900px;
+      padding: 3rem 2rem 4rem;
+    }
+  }
+
   /* Override navbar styling for docs layout */
   .docs-navbar-wrapper {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .docs-navbar-wrapper {
+      margin-bottom: 3rem;
+    }
   }
   
   .docs-navbar-wrapper nav {
-    margin-top: -80px !important;
+    margin-top: -60px !important;
     position: static !important;
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+
+  @media (min-width: 1024px) {
+    .docs-navbar-wrapper nav {
+      margin-top: -80px !important;
+    }
   }
 
   /* Documentation prose styling */
@@ -54,32 +128,102 @@ const pageDescription = frontmatter?.description || description;
 
   .prose h1 {
     color: #54CD4C;
-    font-size: 2.5rem;
+    font-size: 1.875rem;
     font-weight: 800;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     line-height: 1.2;
+    word-wrap: break-word;
+  }
+
+  @media (min-width: 640px) {
+    .prose h1 {
+      font-size: 2.25rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .prose h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
   }
 
   .prose h2 {
     color: #ffffff;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @media (min-width: 640px) {
+    .prose h2 {
+      font-size: 1.75rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .prose h2 {
+      font-size: 2rem;
+    }
+  }
+
+  .prose h3 {
+    color: #f1f5f9;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose h3 {
+      font-size: 1.5rem;
+    }
   }
 
   .prose p {
     color: #cbd5e1;
     line-height: 1.75;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose p {
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .prose ul, .prose ol {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose ul, .prose ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .prose li {
+    color: #cbd5e1;
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
   }
 
   .prose a {
     color: #54CD4C;
     text-decoration: none;
     transition: all 0.2s;
+    word-break: break-word;
   }
 
   .prose a:hover {
@@ -91,7 +235,153 @@ const pageDescription = frontmatter?.description || description;
     background: rgba(255, 255, 255, 0.1);
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
-    font-size: 0.875em;
+    font-size: 0.8125em;
     color: #54CD4C;
+    word-break: break-word;
+  }
+
+  @media (min-width: 640px) {
+    .prose code {
+      font-size: 0.875em;
+    }
+  }
+
+  .prose pre {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose pre {
+      font-size: 0.875rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .prose pre code {
+    background: none;
+    padding: 0;
+    color: #e2e8f0;
+  }
+
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose img {
+      border-radius: 0.75rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .prose blockquote {
+    border-left: 3px solid #54CD4C;
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+    display: block;
+    overflow-x: auto;
+  }
+
+  @media (min-width: 640px) {
+    .prose table {
+      display: table;
+    }
+  }
+
+  .prose th, .prose td {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  .prose th {
+    background: rgba(255, 255, 255, 0.05);
+    font-weight: 600;
+  }
+
+  /* Search trigger button */
+  .search-trigger-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #cbd5e1;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  @media (min-width: 640px) {
+    .search-trigger-btn {
+      top: 1.5rem;
+      right: 1.5rem;
+      padding: 0.625rem 1rem;
+    }
+  }
+
+  .search-trigger-btn:hover {
+    background: rgba(30, 41, 59, 0.95);
+    border-color: #54CD4C;
+    color: #54CD4C;
+  }
+
+  .search-trigger-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .search-trigger-btn span {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .search-trigger-btn span {
+      display: inline;
+    }
+  }
+
+  .search-trigger-btn kbd {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.125rem 0.375rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .search-trigger-btn kbd {
+      display: inline;
+    }
   }
 </style>

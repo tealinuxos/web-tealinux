@@ -7,14 +7,12 @@ import Footer from '../components/organisms/Footer.astro';
 <Layout title="About TeaLinuxOS - Our Story">
 	<main class="min-h-screen bg-black text-slate-50 font-['Poppins',sans-serif] flow-root relative">
 		<!-- Background Glow -->
-		<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#54CD4C]/10 blur-[120px] rounded-full z-0"></div>
-		<div class="absolute bottom-[10%] right-[-10%] w-[30%] h-[30%] bg-[#54CD4C]/5 blur-[100px] rounded-full z-0"></div>
 
 		<div class="relative z-[1]">
 			<Navbar />
 
 			<!-- Hero Section -->
-			<header class="relative pt-[100px] pb-[80px] px-[5%] text-center max-w-[900px] mx-auto flex flex-col items-center">
+			<header class="relative pt-[100px]  px-[5%] text-center max-w-[900px] mx-auto flex flex-col items-center">
 				<h1 class="hero-title mb-4 text-[48px] md:text-[60px]">
 					About TeaLinuxOS
 				</h1>
@@ -37,7 +35,7 @@ import Footer from '../components/organisms/Footer.astro';
 			<section id="story" class="relative py-[100px] px-[5%] max-w-[1240px] mx-auto">
 
 
-                <div class="flex flex-col gap-12 items-center">
+                <div class="flex flex-col gap-4 items-center">
 
                     <div class="text-center mb-16">
                         <h2 class="text-3xl md:text-4xl font-bold flex flex-wrap items-center justify-center gap-3">
@@ -50,47 +48,49 @@ import Footer from '../components/organisms/Footer.astro';
                             </span>
                         </h2>
                     </div>
-                    <!-- Image with Clipped Corner -->
-                    <div class="relative group w-full max-w-[1200px]">
-                            <img src="/src/assets/cosmic_de.webp" alt="TeaLinuxOS Cosmic DE" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+					<div class="flex flex-col md:flex-row gap-12 items-center w-full max-w-[1240px]">
+						<div class="relative group w-full max-w-[450px]">
+                            <img src="/src/assets/logo.svg" alt="TeaLinuxOS Cosmic DE" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
 
-                    <!-- Content -->
-                    <div class="flex  gap-12 items-center w-full max-w-[800px] space-y-8">
-                        <div class="space-y-6">
-                            <p class="journey-text text-center md:text-left">
-                                TeaLinuxOS was first developed by DOSCOM (Dinus Open Source Community) as a learning platform for students and developers to explore open-source software.
-                            </p>
-                            <p class="journey-text text-center md:text-left">
-                                Based on Arch Linux, TeaLinuxOS combines speed, simplicity, and modern design - made by love and crafted by the community.
-                            </p>
-                        </div>
+						<div class="flex flex-col  gap-4 items-center w-full max-w-[800px] space-y-8">
+							<div class="space-y-6">
+								<p class="journey-text text-center md:text-left">
+									TeaLinuxOS was first developed by DOSCOM (Dinus Open Source Community) as a learning platform for 
+									students and developers to explore open-source software.
+								</p>
+								<p class="journey-text text-center md:text-left">
+									Based on Arch Linux, TeaLinuxOS combines speed, simplicity, and modern design - made by love and crafted by the community.
+								</p>
+							</div>
 
-                        <!-- Timeline -->
-                        <ul class="space-y-4 pt-2 flex flex-col items-center md:items-start">
-                            <li class="flex items-center gap-4">
-                                <div class="w-2.5 h-2.5 rounded-full bg-[#54CD4C]"></div>
-                                <div class="flex items-baseline gap-3">
-                                    <span class="text-[#54CD4C] font-semibold text-lg">2010</span>
-                                    <span class="text-white/90 font-medium">First TeaLinuxOS prototype</span>
-                                </div>
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <div class="w-2.5 h-2.5 rounded-full bg-[#54CD4C]"></div>
-                                <div class="flex items-baseline gap-3">
-                                    <span class="text-[#54CD4C] font-semibold text-lg">2015</span>
-                                    <span class="text-white/90 font-medium">Became part of DOSCOM education program</span>
-                                </div>
-                            </li>
-                            <li class="flex items-center gap-4">
-                                <div class="w-2.5 h-2.5 rounded-full bg-[#54CD4C]"></div>
-                                <div class="flex items-baseline gap-3">
-                                    <span class="text-[#54CD4C] font-semibold text-lg">2025</span>
-                                    <span class="text-white/90 font-medium">Released new editions with Wayland and Plasma 6</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+							<!-- Timeline -->
+							<ul class="space-y-4 pt-2 flex flex-col items-center md:items-start">
+								<li class="flex items-center gap-4">
+									<div class="w-2.5 h-2.5 rounded-full bg-[#54CD4C]"></div>
+									<div class="flex items-baseline gap-3">
+										<span class="text-[#54CD4C] font-semibold text-lg">2010</span>
+										<span class="text-white/90 font-medium">First TeaLinuxOS prototype</span>
+									</div>
+								</li>
+								<li class="flex items-center gap-4">
+									<div class="w-2.5 h-2.5 rounded-full bg-[#54CD4C]"></div>
+									<div class="flex items-baseline gap-3">
+										<span class="text-[#54CD4C] font-semibold text-lg">2015</span>
+										<span class="text-white/90 font-medium">Became part of DOSCOM education program</span>
+									</div>
+								</li>
+								<li class="flex items-center gap-4">
+									<div class="flex items-baseline gap-3">
+										<span class="text-[#54CD4C] font-semibold text-lg">2025</span>
+										<span class="text-white/90 font-medium">Released new editions with Wayland and Plasma 6</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
                 </div>
 
 			</section>
