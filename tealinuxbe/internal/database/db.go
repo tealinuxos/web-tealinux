@@ -47,15 +47,10 @@ func Connect() {
 		log.Fatal("DB PING ERROR:", err)
 	}
 
-	// Auto migrate
+	// Auto migrate - User and Download models
 	if err := db.AutoMigrate(
 		&models.User{},
-		&models.Category{},
-		&models.Topic{},
-		&models.Post{},
-		&models.Like{},
-		&models.Tag{},
-		&models.TopicTag{},
+		&models.Download{},
 	); err != nil {
 		log.Fatal("MIGRATION ERROR:", err)
 	}
@@ -63,7 +58,6 @@ func Connect() {
 	DB = db
 	log.Println("Database connected & migrated")
 
-	// Seed initial data
+	// Seed initial admin data
 	SeedAdmin()
-	SeedForumCategories()
 }

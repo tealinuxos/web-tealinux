@@ -1,49 +1,242 @@
 ---
-import AdminLayout from "../../components/templates/AdminLayout.astro"
-import StatCard from "../../components/molecules/StatCard.astro"
+import AdminLayout from '../../layouts/AdminLayout.astro';
+
+export const prerender = false;
 ---
 
-<AdminLayout>
-  <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+<AdminLayout title="Downloads - Admin Dashboard">
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <!-- Total Downloads -->
+    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 rounded-lg bg-[#54CD4C]/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-[#54CD4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-white mb-1" id="totalDownloads">-</p>
+      <p class="text-sm text-slate-400">Total Downloads</p>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    <StatCard title="Users" value="-" id="stat-users" />
-    <StatCard title="Topics" value="-" id="stat-topics" />
-    <StatCard title="Categories" value="-" id="stat-categories" />
+    <!-- Downloads Today -->
+    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-white mb-1" id="downloadsToday">-</p>
+      <p class="text-sm text-slate-400">Downloads Today</p>
+    </div>
+
+    <!-- COSMIC Downloads -->
+    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+          </svg>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-white mb-1" id="cosmicDownloads">-</p>
+      <p class="text-sm text-slate-400">COSMIC Edition</p>
+    </div>
+
+    <!-- PLASMA Downloads -->
+    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+          <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+      </div>
+      <p class="text-3xl font-bold text-white mb-1" id="plasmaDownloads">-</p>
+      <p class="text-sm text-slate-400">PLASMA Edition</p>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Edition Distribution -->
+    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+      <h3 class="text-lg font-semibold text-white mb-6">Downloads by Edition</h3>
+      <div class="flex items-center justify-center gap-8">
+        <div class="flex flex-col items-center">
+          <div class="relative w-32 h-32">
+            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#334155" stroke-width="12"/>
+              <circle id="cosmicArc" cx="50" cy="50" r="40" fill="none" stroke="#a855f7" stroke-width="12" stroke-dasharray="0 251.2" stroke-linecap="round"/>
+              <circle id="plasmaArc" cx="50" cy="50" r="40" fill="none" stroke="#22d3ee" stroke-width="12" stroke-dasharray="0 251.2" stroke-linecap="round"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span id="totalPercent" class="text-2xl font-bold text-white">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-4 h-4 rounded bg-purple-500"></div>
+            <span class="text-slate-300">COSMIC</span>
+            <span id="cosmicPercent" class="text-white font-semibold ml-auto">0%</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-4 h-4 rounded bg-cyan-400"></div>
+            <span class="text-slate-300">PLASMA</span>
+            <span id="plasmaPercent" class="text-white font-semibold ml-auto">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Time Stats -->
+    <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+      <h3 class="text-lg font-semibold text-white mb-6">Download Trends</h3>
+      <div class="space-y-4">
+        <div class="flex items-center justify-between p-4 rounded-lg bg-slate-800/50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span class="text-slate-300">This Week</span>
+          </div>
+          <span id="downloadsThisWeek" class="text-xl font-bold text-white">-</span>
+        </div>
+        <div class="flex items-center justify-between p-4 rounded-lg bg-slate-800/50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <span class="text-slate-300">This Month</span>
+          </div>
+          <span id="downloadsThisMonth" class="text-xl font-bold text-white">-</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Downloads Table -->
+  <div class="bg-slate-900 rounded-xl p-6 border border-slate-800">
+    <h3 class="text-lg font-semibold text-white mb-6">Recent Downloads</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="border-b border-slate-800">
+            <th class="text-left py-3 px-4 text-sm font-semibold text-slate-400">Edition</th>
+            <th class="text-left py-3 px-4 text-sm font-semibold text-slate-400">IP Address</th>
+            <th class="text-left py-3 px-4 text-sm font-semibold text-slate-400">User Agent</th>
+            <th class="text-left py-3 px-4 text-sm font-semibold text-slate-400">Date</th>
+          </tr>
+        </thead>
+        <tbody id="recentDownloads">
+          <tr>
+            <td colspan="4" class="py-8 text-center text-slate-500">
+              <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-[#54CD4C]"></div>
+              <p class="mt-2">Loading...</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </AdminLayout>
 
-<script is:inline>
-  {
-    const API_URL = 'http://localhost:3000/api/admin/dashboard';
-    const token = localStorage.getItem('tealinux_token');
+<script>
+  import { getDownloadStats } from '../../lib/api';
 
-    if (!token) {
-      window.location.href = '/login';
-    }
-
-    async function fetchStats() {
-      try {
-        const res = await fetch(API_URL, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!res.ok) {
-            if(res.status === 401) window.location.href = '/login';
-            throw new Error('Failed to fetch stats');
-        }
-        const data = await res.json();
+  async function loadStats() {
+    try {
+      const stats = await getDownloadStats();
+      
+      // Update stat cards
+      document.getElementById('totalDownloads')!.textContent = stats.total_downloads.toLocaleString();
+      document.getElementById('downloadsToday')!.textContent = stats.downloads_today.toLocaleString();
+      document.getElementById('downloadsThisWeek')!.textContent = stats.downloads_this_week.toLocaleString();
+      document.getElementById('downloadsThisMonth')!.textContent = stats.downloads_this_month.toLocaleString();
+      
+      const cosmic = stats.downloads_by_edition['COSMIC'] || 0;
+      const plasma = stats.downloads_by_edition['PLASMA'] || 0;
+      
+      document.getElementById('cosmicDownloads')!.textContent = cosmic.toLocaleString();
+      document.getElementById('plasmaDownloads')!.textContent = plasma.toLocaleString();
+      
+      // Update pie chart
+      const total = cosmic + plasma;
+      if (total > 0) {
+        const cosmicPercent = Math.round((cosmic / total) * 100);
+        const plasmaPercent = 100 - cosmicPercent;
         
-        document.querySelector('#stat-users p').textContent = data.users;
-        document.querySelector('#stat-topics p').textContent = data.topics;
-        document.querySelector('#stat-categories p').textContent = data.categories;
-
-      } catch (err) {
-        console.error(err);
+        const circumference = 2 * Math.PI * 40;
+        const cosmicDash = (cosmic / total) * circumference;
+        const plasmaDash = (plasma / total) * circumference;
+        
+        const cosmicArc = document.getElementById('cosmicArc') as SVGCircleElement;
+        const plasmaArc = document.getElementById('plasmaArc') as SVGCircleElement;
+        
+        cosmicArc.style.strokeDasharray = `${cosmicDash} ${circumference}`;
+        plasmaArc.style.strokeDasharray = `${plasmaDash} ${circumference}`;
+        plasmaArc.style.strokeDashoffset = `-${cosmicDash}`;
+        
+        document.getElementById('cosmicPercent')!.textContent = `${cosmicPercent}%`;
+        document.getElementById('plasmaPercent')!.textContent = `${plasmaPercent}%`;
+        document.getElementById('totalPercent')!.textContent = total.toString();
       }
+      
+      // Update recent downloads table
+      const tbody = document.getElementById('recentDownloads')!;
+      if (stats.recent_downloads.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-8 text-center text-slate-500">
+              No downloads recorded yet
+            </td>
+          </tr>
+        `;
+      } else {
+        tbody.innerHTML = stats.recent_downloads.map(download => {
+          const date = new Date(download.created_at).toLocaleString('id-ID');
+          const userAgent = download.user_agent.length > 50 
+            ? download.user_agent.substring(0, 50) + '...' 
+            : download.user_agent;
+          const editionBg = download.edition === 'COSMIC' ? 'bg-purple-500/10 text-purple-400' : 'bg-cyan-500/10 text-cyan-400';
+          
+          return `
+            <tr class="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+              <td class="py-3 px-4">
+                <span class="inline-flex items-center px-2.5 py-1 rounded ${editionBg} font-medium text-sm">
+                  ${download.edition}
+                </span>
+              </td>
+              <td class="py-3 px-4 text-slate-300 font-mono text-sm">${download.ip_address}</td>
+              <td class="py-3 px-4 text-slate-400 text-sm" title="${download.user_agent}">${userAgent}</td>
+              <td class="py-3 px-4 text-slate-400 text-sm">${date}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+      
+    } catch (error) {
+      console.error('Failed to load stats:', error);
+      document.getElementById('recentDownloads')!.innerHTML = `
+        <tr>
+          <td colspan="4" class="py-8 text-center text-red-400">
+            Failed to load statistics. Please try again.
+          </td>
+        </tr>
+      `;
     }
-
-    fetchStats();
   }
+
+  loadStats();
+  
+  // Refresh every 30 seconds
+  setInterval(loadStats, 30000);
 </script>

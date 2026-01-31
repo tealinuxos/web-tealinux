@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"os"
+	"strconv"
 
 	"tealinux-api/internal/database"
 	"tealinux-api/internal/models"
@@ -187,7 +188,7 @@ func GoogleCallback(c *fiber.Ctx) error {
 	redirectURL := frontendURL + "/auth/callback?" +
 		"access_token=" + access +
 		"&refresh_token=" + refresh +
-		"&id=" + utils.UintToString(user.ID) +
+		"&id=" + strconv.FormatUint(uint64(user.ID), 10) +
 		"&name=" + user.Name +
 		"&email=" + user.Email +
 		"&role=" + user.Role +
@@ -261,7 +262,7 @@ func GithubCallback(c *fiber.Ctx) error {
 	redirectURL := frontendURL + "/auth/callback?" +
 		"access_token=" + access +
 		"&refresh_token=" + refresh +
-		"&id=" + utils.UintToString(user.ID) +
+		"&id=" + strconv.FormatUint(uint64(user.ID), 10) +
 		"&name=" + user.Name +
 		"&email=" + user.Email +
 		"&role=" + user.Role +

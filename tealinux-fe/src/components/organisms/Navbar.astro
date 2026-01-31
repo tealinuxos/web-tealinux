@@ -22,7 +22,6 @@ const wrapperClass = isFixed
         <a href="/" class="text-white/90 hover:text-white hover:text-shadow-glow transition-all text-sm font-medium">Home</a>
         <a href="/download" class="text-white/90 hover:text-white hover:text-shadow-glow transition-all text-sm font-medium">Download</a>
         <a href="/docs" class="text-white/90 hover:text-white hover:text-shadow-glow transition-all text-sm font-medium">Docs</a>
-        <a href="/forum" class="text-white/90 hover:text-white hover:text-shadow-glow transition-all text-sm font-medium">Forum</a>
         <a href="/about" class="text-white/90 hover:text-white hover:text-shadow-glow transition-all text-sm font-medium">About</a>
         
         <div class="flex gap-4 items-center" id="navLinksDesktop">
@@ -31,7 +30,6 @@ const wrapperClass = isFixed
         </div>
 
         <div class="hidden gap-4 items-center" id="userProfileDesktop">
-            <a href="/admin" id="adminLinkDesktop" class="hidden text-white/90 hover:text-white text-sm font-medium">Admin</a>
             <span id="userNameDesktop" class="text-white font-semibold text-sm"></span>
             <button id="logoutBtnDesktop" class="border border-white/30 text-white px-3 py-1.5 rounded-full text-xs hover:bg-white/10 transition-all">Logout</button>
         </div>
@@ -48,7 +46,6 @@ const wrapperClass = isFixed
     <a href="/" class="text-white/90 hover:text-white py-2 border-b border-white/10">Home</a>
     <a href="/download" class="text-white/90 hover:text-white py-2 border-b border-white/10">Download</a>
     <a href="/docs" class="text-white/90 hover:text-white py-2 border-b border-white/10">Docs</a>
-    <a href="/community" class="text-white/90 hover:text-white py-2 border-b border-white/10">Community</a>
     <a href="/about" class="text-white/90 hover:text-white py-2 border-b border-white/10">About</a>
     
     <div class="flex flex-col gap-3 mt-2" id="navLinksMobile">
@@ -57,7 +54,6 @@ const wrapperClass = isFixed
     </div>
 
     <div class="hidden flex-col gap-3 mt-2" id="userProfileMobile">
-        <a href="/admin" id="adminLinkMobile" class="hidden text-center text-white/90 hover:text-white py-2">Admin Panel</a>
         <div class="flex justify-between items-center px-2">
             <span id="userNameMobile" class="text-white font-semibold"></span>
             <button id="logoutBtnMobile" class="text-red-400 hover:text-red-300 text-sm">Logout</button>
@@ -71,13 +67,11 @@ const wrapperClass = isFixed
 	const navLinksDesktop = document.getElementById('navLinksDesktop');
 	const userProfileDesktop = document.getElementById('userProfileDesktop');
 	const userNameDesktop = document.getElementById('userNameDesktop');
-	const adminLinkDesktop = document.getElementById('adminLinkDesktop');
 	const logoutBtnDesktop = document.getElementById('logoutBtnDesktop');
 
     const navLinksMobile = document.getElementById('navLinksMobile');
 	const userProfileMobile = document.getElementById('userProfileMobile');
 	const userNameMobile = document.getElementById('userNameMobile');
-	const adminLinkMobile = document.getElementById('adminLinkMobile');
 	const logoutBtnMobile = document.getElementById('logoutBtnMobile');
 
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -101,9 +95,6 @@ const wrapperClass = isFixed
 			userProfileDesktop.classList.add('flex');
 		}
 		if (userNameDesktop) userNameDesktop.textContent = user.name;
-		if (user.role === 'admin' && adminLinkDesktop) {
-			adminLinkDesktop.classList.remove('hidden');
-		}
 
 		// Mobile updates
 		if (navLinksMobile) navLinksMobile.style.display = 'none';
@@ -112,9 +103,6 @@ const wrapperClass = isFixed
 			userProfileMobile.classList.add('flex');
 		}
 		if (userNameMobile) userNameMobile.textContent = user.name;
-		if (user.role === 'admin' && adminLinkMobile) {
-			adminLinkMobile.classList.remove('hidden');
-		}
 	}
 
     const handleLogout = () => {

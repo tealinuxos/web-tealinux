@@ -19,9 +19,6 @@ func main() {
 	}
 
 	database.Connect()
-	database.SeedAdmin()
-	database.SeedForumCategories()
-	database.SeedForumData()
 
 	app := fiber.New(fiber.Config{
 		AppName: "TeaLinux API",
