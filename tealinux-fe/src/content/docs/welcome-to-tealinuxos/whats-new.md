@@ -15,4 +15,4 @@ Additionally, the desktop environment has also evolved — moving from the light
 
 As part of its latest innovations, TeaLinuxOS now introduces the Tea Installer, a new installation tool built using the Rust programming language. With its high performance and improved memory safety, Tea Installer ensures a fast, stable, and secure installation process for all users.
 
-![TeaLinux Installer Preview](/img/installer.png)
+![TeaLinux Installer Preview](/img/installer.webp)

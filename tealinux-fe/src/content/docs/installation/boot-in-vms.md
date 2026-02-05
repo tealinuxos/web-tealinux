@@ -9,8 +9,11 @@ order: 4
 
 Running TeaLinuxOS in a virtual machine is a convenient way to try or use the system without changing your current OS. For the best experience, we recommend configuring your VM with the following settings:
 
-::table{ :headers='["Settings", "Recommended Value",""]' :rows='[ ["CPU Cores", "2 or more", ""],["Video Memory", "At least 128 MB", ""],["3D Acceleration", "Enabled (Settings > Display > Enable 3D Acceleration)", ""]]'}
-::
+| Settings | Recommended Value |
+| :--- | :--- |
+| CPU Cores | 2 or more |
+| Video Memory | At least 128 MB |
+| 3D Acceleration | Enabled (Settings > Display > Enable 3D Acceleration) |
 
 ## Steps to Boot TeaLinuxOS in a VM
 

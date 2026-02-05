@@ -9,7 +9,7 @@ navigation: true
 Before proceeding with the final installation step, a summary screen will display all the choices you have made during the setup process. This allows you to review and confirm that everything is correct.
 
 The summary includes:
-<img src="/image/Summary.png" alt="Installation Summary Screen" class="mb-4" />
+<img src="/img/Summary1.webp" alt="Installation Summary Screen" class="mb-4" />
 
 - **Disk Setup and Partitions**  
   Details of the selected disk, partition table format (GPT or MBR), mount points (e.g. `/`, `/boot/efi`, `swap`), and file systems (e.g. EXT4, BTRFS).
@@ -31,7 +31,7 @@ The summary includes:
 </div>
 
 <br/>
-    <img src="/image/Summary-2.png" alt="Installation Summary Screen" class="mb-4" />
+    <img src="/img/Summary-2.webp" alt="Installation Summary Screen" class="mb-4" />
 After you confirm the summary, the installation will begin and may take several minutes to complete.
 
 <NavLink

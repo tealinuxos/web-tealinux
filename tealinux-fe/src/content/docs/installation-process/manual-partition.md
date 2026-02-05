@@ -14,7 +14,7 @@ This method is ideal for advanced users who want to:
 - Use different file systems such as **BTRFS** or **XFS**
 - Set up LVM, encryption, or specific partition layouts
 
-![Manual Partition Preview](/image/manual.png)
+![Manual Partition Preview](/img/manual.webp)
 
 ---
 
@@ -27,7 +27,7 @@ This method is ideal for advanced users who want to:
 2. **Choose Installation Type: Manual Partitioning**  
    On the partitioning screen, select the **Manual** option.
 
-   ![Manual Partition Selection](/image/manual2.png)
+   ![Manual Partition Selection](/img/manual2.webp)
 
 3. **Disk and Partition Setup**  
    You will see a list of available disks and existing partitions. From this screen, you can:

@@ -7,7 +7,7 @@ order: 1
 
 # About Page - TeaLinuxOS
 
-![About System Preview](/image/about-system.png)
+![About System Preview](/img/Summary1.webp)
 
 Before jumping into the installation, the **About** page gives you a quick overview of your system. It’s a handy spot to make sure everything is ready and compatible.
 

@@ -11,20 +11,22 @@ You can [download](https://pinguin.dinus.ac.id/iso/tealinuxos/TeaLinuxOS-Arch/20
 
 ## TeaLinuxOS Edition
 
-::table{ :headers='["Edition", "Description"]' :rows='[ ["Cosmic Edition", "A sleek, modern, and user-friendly desktop built for both aesthetics and productivity."],["KDE Edition", "A powerful, customizable, and feature-rich desktop for advanced users and developers."]]'}
-::
+| Edition | Description |
+| :--- | :--- |
+| Cosmic Edition | A sleek, modern, and user-friendly desktop built for both aesthetics and productivity. |
+| KDE Edition | A powerful, customizable, and feature-rich desktop for advanced users and developers. |
 
 ## Cosmic Edition
 
-<img src="/Cosmic/1.png" alt="TeaLinux Installer Preview" class="mb-6" />
-<img src="/Cosmic/2.png" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
 
 The Cosmic Edition of TeaLinuxOS is built with a focus on modern design and ease of use. Featuring a sleek interface, smooth animations, and intuitive layout, it’s perfect for users who want a beautiful and distraction-free desktop experience. This edition is especially recommended for students, content creators, and professionals who value both style and functionality.
 
 ## KDE Edition
 
-<img src="/Plasma/1.png" alt="TeaLinux Installer Preview" class="mb-6" />
-<img src="/Plasma/2.png" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
 
 The KDE Edition offers a rich and flexible desktop environment powered by KDE Plasma. Known for its high degree of customizability, KDE Edition is ideal for power users, developers, and anyone who likes to tweak their system to fit their workflow. It provides powerful tools out of the box, while still maintaining a clean and efficient user experience.
 

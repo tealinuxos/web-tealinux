@@ -5,15 +5,16 @@ category: "Installation"
 order: 1
 ---
 
-::heading
-Installation
-::
+## Installation
 The following guide describes how to download the TeaLinuxOS.iso image, write it to a flash drive, and install it on the hardware of your choice.
 
 ## System Specifications
 
-::table{ :headers='["Component", "Requirement", "Recommended"]' :rows='[ ["CPU", "64-bit x86", ""],["RAM", "4 GB", "8 GB"],["Drive Storage", "20 GB", ""]]'}
-::
+| Component | Requirement | Recommended |
+| :--- | :--- | :--- |
+| CPU | 64-bit x86 | 2 GHz Dual Core |
+| RAM | 4 GB | 8 GB |
+| Drive Storage | 20 GB | 40 GB |
 
 From [TealinuxOS](https://doscom.org)., choose DOWNLOAD. The download dialog includes the current Requirements, and download Filesize, as well as the image checksums used to verify the file once downloaded.
 

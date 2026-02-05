@@ -9,7 +9,7 @@ order: 3
 
 This guide will walk you through installing **TeaLinuxOS as the only operating system** on your computer. It’s perfect for users who want a clean system setup with no dual boot or leftover partitions from other OSes.
 
-![Single Boot Preview](/image/singleboot.png)
+![Single Boot Preview](/img/singleboot.webp)
 
 ---
 
@@ -23,7 +23,7 @@ This guide will walk you through installing **TeaLinuxOS as the only operating s
    On the installation screen, select the **"Single Boot"** option.  
    This will erase all existing data on your selected disk and install TeaLinuxOS as the only OS.
 
-   ![Installation Type Selection](/image/singleboot2.png)
+   ![Installation Type Selection](/img/singleboot2.webp)
 
    You’ll also be able to select the file system type here — common choices include:
 

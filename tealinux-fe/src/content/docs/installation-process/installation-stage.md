@@ -7,7 +7,7 @@ navigation: true
 # Installation Stage
 
 After you confirm the summary and proceed, TeaLinuxOS will begin the installation process. This stage includes several automated steps to set up your system:
-<img src="/image/Summary-1.png" alt="Installation Stage" class="mb-4" />
+<img src="/img/Summary-1.webp" alt="Installation Stage" class="mb-4" />
 
 ## Partition Formatting and Mounting
 
@@ -37,7 +37,7 @@ The system installs and configures GRUB (or another bootloader) to ensure your m
 
 Temporary installation files are removed, and the system is prepared for the first boot.
 
-<img src="/image/Summary-2.png" alt="Installation Stage Finalizing" class="mb-4" />
+<img src="/img/Summary-2.webp" alt="Installation Stage Finalizing" class="mb-4" />
 
 <Alert type="danger" title="Note !" message="Do not power off or restart your computer during this stage.Interruptions may result in an incomplete or broken installation."/>
 Once the process is complete, you’ll be prompted to reboot into your newly installed TeaLinuxOS system.

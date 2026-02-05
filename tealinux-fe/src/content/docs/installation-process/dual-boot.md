@@ -9,7 +9,7 @@ order: 4
 
 Installing **TeaLinuxOS alongside another operating system** (usually Windows) lets you choose which OS to use every time you boot your computer. This is great if you still need access to another OS but want to explore or transition into using TeaLinuxOS.
 
-![Dual Boot Preview](/image/dualboot.png)
+![Dual Boot Preview](/img/dualboot.webp)
 
 ---
 
@@ -28,7 +28,7 @@ This ensures your current operating system and files stay untouched.
    Use a USB or DVD with TeaLinuxOS and boot your computer from it.
 
 2. **Select “Dual Boot” Installation Type**  
-   ![Dual Boot Preview](/image/dualboot2.png)
+   ![Dual Boot Preview](/img/dualboot2.webp)
 
    On the installation screen, choose **Dual Boot**.  
     You’ll see a list of partitions — pick one that has enough free space of 20 GB.

@@ -8,7 +8,7 @@ navigation: true
 
 During the installation process, you will be asked to create a user account. This step sets up the main user who will log in and manage the system after installation.
 
-<img src="/image/user.png" alt="User Creation Screen" />
+<img src="/img/user.webp" alt="User Creation Screen" />
 
 You will be required to provide:
 

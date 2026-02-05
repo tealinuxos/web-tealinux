@@ -15,7 +15,9 @@ This session allows you to:
 - Test hardware compatibility (e.g., Wi-Fi, sound, display).
 - Try out pre-installed applications and tools.
 
-::alert{:type=warning :title="Note" message="ome applications available in the Live Session are temporary. Once you install the system to your hard drive, these apps may not be included by default and will be removed unless reinstalled manually."}
+> **Note**
+>
+> Some applications available in the Live Session are temporary. Once you install the system to your hard drive, these apps may not be included by default and will be removed unless reinstalled manually.
 
 ## Ready to Install?
 

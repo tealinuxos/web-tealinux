@@ -24,9 +24,10 @@ If you are not sure how to do this, check the documentation for your computer or
     Select the USB stick or DVD from the boot menu.
   </li>
 
-::alert{:type="success" :title="Hint" :message="Most computers let you press a specific key to choose what to boot from, and there's always a key to open the BIOS settings where you can change the boot order. Depending on your computer, it could be Esc, F1, F2, F8, F10, F11, F12, or Delete. You’ll usually see a quick message about it on the screen right when the computer starts up."}
-::
-<img src="/img/grub.png" alt="Grub Preview" class="mb-6 my-5" />
+> **Hint**
+>
+> Most computers let you press a specific key to choose what to boot from, and there's always a key to open the BIOS settings where you can change the boot order. Depending on your computer, it could be Esc, F1, F2, F8, F10, F11, F12, or Delete. You’ll usually see a quick message about it on the screen right when the computer starts up.
+<img src="/img/grub.webp" alt="Grub Preview" class="mb-6 my-5" />
 
   <li class="text-[16px] text-justify font-light text-[#4A4A4A] dark:text-black-400 font-archivo">
   Press the <code class="text-[16px] font-archivo">Enter</code> key to boot into the live environment.

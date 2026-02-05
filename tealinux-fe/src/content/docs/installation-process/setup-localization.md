@@ -9,7 +9,7 @@ order: 2
 
 The **Localization** step in the TeaLinuxOS installer allows you to configure regional settings that define how your system behaves in terms of language, time, and input.
 you can settings localization
-![Localization Preview](/image/localization.png)
+![Localization Preview](/img/installer.webp)
 During this step, TeaLinuxOS automatically detects and applies default values based on your location. This makes setup quick and convenient — but you still have the option to make changes if needed.
 
 <div>
