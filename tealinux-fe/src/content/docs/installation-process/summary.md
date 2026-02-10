@@ -1,7 +1,8 @@
 ---
 title: "Summary"
-date: 2025-02-13
-navigation: true
+description: "Review your installation choices before proceeding"
+category: "Installation Process"
+order: 7
 ---
 
 # Summary

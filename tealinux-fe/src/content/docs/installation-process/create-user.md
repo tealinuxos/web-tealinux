@@ -1,7 +1,8 @@
 ---
 title: "User Creation"
-date: 2025-02-13
-navigation: true
+description: "Create your user account during installation"
+category: "Installation Process"
+order: 6
 ---
 
 # User Creation

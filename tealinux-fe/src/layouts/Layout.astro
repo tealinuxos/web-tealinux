@@ -18,7 +18,11 @@ const { title = 'TeaLinuxOS' } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-black text-slate-50">
+		<div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
+			<div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(84,205,76,0.1)_0%,transparent_70%)] blur-[100px] opacity-40"></div>
+			<div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(84,205,76,0.08)_0%,transparent_70%)] blur-[100px] opacity-40"></div>
+		</div>
 		<slot />
 		<SearchModal />
 	</body>

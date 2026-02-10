@@ -1,7 +1,8 @@
 ---
 title: "Installation Stage"
-date: 2025-02-13
-navigation: true
+description: "The final installation process"
+category: "Installation Process"
+order: 8
 ---
 
 # Installation Stage

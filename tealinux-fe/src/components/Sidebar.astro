@@ -5,6 +5,23 @@ import tealinuxLogo from '../assets/tealinus_ijo.svg';
 const docs = await getCollection('docs');
 const pathname = Astro.url.pathname;
 
+// Define the desired category order
+const categoryOrder = [
+  'Welcome to TeaLinuxOS',
+  'Installation',
+  'Live Boot',
+  'Installation Process',
+  'General',
+];
+
+// Define item order within each category
+const itemOrderMap: Record<string, string[]> = {
+  'Welcome to TeaLinuxOS': ['Welcome to TeaLinuxOS', 'What is TeaLinux?', "What's New"],
+  'Installation': ['Installation', 'Requirements', 'Which Edition to Choose', 'Boot TeaLinuxOS', 'Boot in VMs', 'Installation Method'],
+  'Live Boot': ['Create Bootable Media'],
+  'Installation Process': ['About Page', 'Setup Localization', 'Single Boot', 'Dual Boot', 'Manual Partition', 'User Creation', 'Summary', 'Installation Stage'],
+};
+
 // Grouping logic
 const groups = docs.reduce((acc, doc) => {
   const category = doc.data.category || 'General';
@@ -15,17 +32,46 @@ const groups = docs.reduce((acc, doc) => {
   return acc;
 }, {} as Record<string, typeof docs>);
 
-// Sorting logic: Sort categories (optional) and items within categories
-const sortedCategories = Object.keys(groups).sort();
-const sidebarData = sortedCategories.map(category => ({
-  title: category,
-  items: groups[category].sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
-}));
+// Sort categories by desired order
+const sortedCategories = Object.keys(groups).sort((a, b) => {
+  const indexA = categoryOrder.indexOf(a);
+  const indexB = categoryOrder.indexOf(b);
+  if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+  if (indexA === -1) return 1;
+  if (indexB === -1) return -1;
+  return indexA - indexB;
+});
+
+// Build sidebar data with custom item ordering
+const sidebarData = sortedCategories.map(category => {
+  const items = groups[category];
+  const order = itemOrderMap[category];
+  
+  if (order) {
+    items.sort((a, b) => {
+      const indexA = order.indexOf(a.data.title);
+      const indexB = order.indexOf(b.data.title);
+      if (indexA === -1 && indexB === -1) return (a.data.order || 0) - (b.data.order || 0);
+      if (indexA === -1) return 1;
+      if (indexB === -1) return -1;
+      return indexA - indexB;
+    });
+  } else {
+    items.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+  }
+
+  return { title: category, items };
+});
 
 const isActive = (slug: string) => {
   const currentPath = pathname.replace(/\/$/, '');
   const targetPath = `/docs/${slug}`.replace(/\/$/, '');
   return currentPath === targetPath || (slug === 'index' && currentPath === '/docs');
+};
+
+// Check if any item in a category is active
+const isCategoryActive = (items: typeof docs) => {
+  return items.some(item => isActive(item.id));
 };
 ---
 
@@ -48,9 +94,9 @@ const isActive = (slug: string) => {
 
 <!-- Sidebar -->
 <aside id="docs-sidebar" class="docs-sidebar">
-  <div class="p-6">
+  <div class="sidebar-inner">
     <!-- Logo Section -->
-    <div class="mb-6 flex items-center justify-between">
+    <div class="sidebar-logo">
       <a href="/docs" class="block">
         <img src={tealinuxLogo.src} alt="TeaLinuxOS" class="h-10 w-auto" />
       </a>
@@ -63,10 +109,10 @@ const isActive = (slug: string) => {
     </div>
 
     <!-- Search Section -->
-    <div class="mb-6">
+    <div class="sidebar-search">
       <button 
         onclick="window.openSearchModal && window.openSearchModal()"
-        class="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-sm text-slate-400 text-left flex items-center gap-3 hover:border-[#54CD4C] hover:text-[#54CD4C] transition-all"
+        class="search-btn"
       >
         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -76,29 +122,40 @@ const isActive = (slug: string) => {
       </button>
     </div>
 
-    <!-- Documentation Navigation -->
-    <nav class="space-y-6">
-      {sidebarData.map((section) => (
-        <div>
-          <h3 class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-3">
-            {section.title}
-          </h3>
-          <ul class="space-y-1">
-            {section.items.map((item) => (
-              <li>
-                <a 
-                  href={`/docs/${item.id === 'index' ? '' : item.id}`}
-                  class={`block px-3 py-2 text-sm rounded-lg transition-all ${
-                    isActive(item.id) 
-                      ? 'bg-[#54CD4C]/20 text-[#54CD4C] font-semibold' 
-                      : 'text-slate-300 hover:text-[#54CD4C] hover:bg-white/5'
-                  }`}
-                >
-                  {item.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <!-- Documentation Navigation - Accordion Style -->
+    <nav class="sidebar-nav">
+      {sidebarData.map((section, sectionIndex) => (
+        <div class={`nav-section ${isCategoryActive(section.items) ? 'section-active' : ''}`} data-section={sectionIndex}>
+          <!-- Category Header (Accordion Toggle) -->
+          <button
+            class="nav-section-header"
+            data-accordion-trigger={sectionIndex}
+            aria-expanded={isCategoryActive(section.items) ? 'true' : 'false'}
+          >
+            <span class="section-title">{section.title}</span>
+            <svg class="section-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          
+          <!-- Category Items (Accordion Content) -->
+          <div 
+            class={`nav-section-items ${isCategoryActive(section.items) ? 'expanded' : ''}`}
+            data-accordion-panel={sectionIndex}
+          >
+            <ul>
+              {section.items.map((item) => (
+                <li>
+                  <a 
+                    href={`/docs/${item.id === 'index' ? '' : item.id}`}
+                    class={`nav-item ${isActive(item.id) ? 'nav-item-active' : ''}`}
+                  >
+                    {item.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       ))}
     </nav>
@@ -114,6 +171,7 @@ const isActive = (slug: string) => {
     const openIcon = document.getElementById('menu-open-icon');
     const closeIcon = document.getElementById('menu-close-icon');
 
+    // Sidebar open/close (mobile)
     function openSidebar() {
       sidebar?.classList.add('open');
       overlay?.classList.remove('hidden');
@@ -141,7 +199,6 @@ const isActive = (slug: string) => {
     closeBtn?.addEventListener('click', closeSidebar);
     overlay?.addEventListener('click', closeSidebar);
 
-    // Close sidebar when clicking a link on mobile
     const navLinks = sidebar?.querySelectorAll('nav a');
     navLinks?.forEach(link => {
       link.addEventListener('click', () => {
@@ -151,11 +208,58 @@ const isActive = (slug: string) => {
       });
     });
 
-    // Close sidebar on resize to desktop
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024) {
         closeSidebar();
       }
+    });
+
+    // Accordion functionality
+    const triggers = document.querySelectorAll('[data-accordion-trigger]');
+    
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const index = trigger.getAttribute('data-accordion-trigger');
+        const panel = document.querySelector(`[data-accordion-panel="${index}"]`) as HTMLElement;
+        const section = trigger.closest('.nav-section');
+        
+        if (!panel || !section) return;
+        
+        const isExpanded = panel.classList.contains('expanded');
+        
+        if (isExpanded) {
+          // Collapse
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          requestAnimationFrame(() => {
+            panel.style.maxHeight = '0px';
+          });
+          panel.classList.remove('expanded');
+          trigger.setAttribute('aria-expanded', 'false');
+          section.classList.remove('section-open');
+        } else {
+          // Expand
+          panel.classList.add('expanded');
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          trigger.setAttribute('aria-expanded', 'true');
+          section.classList.add('section-open');
+          
+          // Reset max-height after transition to allow dynamic content
+          panel.addEventListener('transitionend', function handler() {
+            if (panel.classList.contains('expanded')) {
+              panel.style.maxHeight = 'none';
+            }
+            panel.removeEventListener('transitionend', handler);
+          });
+        }
+      });
+    });
+
+    // Initialize: expand active sections and set their max-height
+    document.querySelectorAll('.nav-section-items.expanded').forEach(panel => {
+      const el = panel as HTMLElement;
+      el.style.maxHeight = 'none';
+      const section = el.closest('.nav-section');
+      section?.classList.add('section-open');
     });
   });
 </script>
@@ -199,11 +303,49 @@ const isActive = (slug: string) => {
     top: 0;
     width: 280px;
     height: 100vh;
-    background: #0a0a0a;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    background: #0d0d0d;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
     overflow-y: auto;
     z-index: 50;
     transition: transform 0.3s ease;
+  }
+
+  .sidebar-inner {
+    padding: 1.25rem 1rem;
+  }
+
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    padding: 0 0.5rem;
+  }
+
+  .sidebar-search {
+    margin-bottom: 1.5rem;
+    padding: 0 0.25rem;
+  }
+
+  .search-btn {
+    width: 100%;
+    padding: 0.625rem 0.875rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: #64748b;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .search-btn:hover {
+    border-color: #54CD4C;
+    color: #54CD4C;
   }
 
   /* Mobile styles */
@@ -225,7 +367,7 @@ const isActive = (slug: string) => {
 
     .docs-sidebar {
       transform: translateX(0);
-      width: 256px;
+      width: 280px;
     }
   }
 
@@ -236,7 +378,7 @@ const isActive = (slug: string) => {
   }
   
   .docs-sidebar::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
   
   .docs-sidebar::-webkit-scrollbar-track {
@@ -246,5 +388,110 @@ const isActive = (slug: string) => {
   .docs-sidebar::-webkit-scrollbar-thumb {
     background: rgba(84, 205, 76, 0.3);
     border-radius: 3px;
+  }
+
+  /* ============================
+     Accordion Navigation Styles
+     ============================ */
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  /* Section Container */
+  .nav-section {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Section Header (Accordion Trigger) */
+  .nav-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    background: none;
+    border: none;
+    color: #54CD4C;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+    border-radius: 6px;
+  }
+
+  .nav-section-header:hover {
+    background: rgba(84, 205, 76, 0.06);
+  }
+
+  .section-title {
+    flex: 1;
+  }
+
+  /* Chevron / Checkmark */
+  .section-chevron {
+    flex-shrink: 0;
+    color: #54CD4C;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s;
+    opacity: 0.8;
+  }
+
+  .nav-section.section-open .section-chevron,
+  .nav-section.section-active .section-chevron {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+
+  /* Accordion Panel */
+  .nav-section-items {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-section-items ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0.375rem 0;
+  }
+
+  /* Nav Items */
+  .nav-item {
+    display: block;
+    padding: 0.5rem 0.75rem 0.5rem 1.75rem;
+    font-size: 0.8125rem;
+    color: #b0b8c4;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    line-height: 1.5;
+  }
+
+  .nav-item:hover {
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .nav-item-active {
+    color: #54CD4C !important;
+    background: rgba(84, 205, 76, 0.08);
+    font-weight: 500;
+    position: relative;
+  }
+
+  .nav-item-active::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #54CD4C;
+    border-radius: 50%;
   }
 </style>
