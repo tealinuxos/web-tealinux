@@ -13,28 +13,79 @@ import Footer from '../components/organisms/Footer.astro';
 		<div class="relative z-[1]">
 			<Navbar />
 
-			<header class="relative py-[100px] px-[5%] text-center max-w-[800px] mx-auto">
-				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(84,205,76,0.2)_0%,transparent_70%)] pointer-events-none -z-10"></div>
-				<h1 class="text-4xl md:text-[4rem] font-black leading-[1.1] mb-6">
-					<span class="text-[#54CD4C]">TeaLinux</span> "Nikmatnya Sebuah Racikan"
-				</h1>
-				<p class="text-xl text-slate-400 mb-10">
-					Discuss, share, and learn about the best Indonesian Linux distribution.
-				</p>
-				<div class="flex justify-center gap-5">
-					<a href="/download" class="flex w-[166px] h-[47px] px-5 py-[14px] flex-col justify-center items-start gap-[10px] shrink-0 rounded-[10px] border-2 border-white/30 bg-white/10 backdrop-blur-[20px] text-white font-bold no-underline transition-all hover:-translate-y-0.5">
-						Download now
-					</a>
-					<a href="/docs" class="flex w-[166px] h-[47px] px-5 py-[14px] flex-col justify-center items-start gap-[10px] shrink-0 rounded-[10px] border-2 border-white/30 bg-white/10 backdrop-blur-[20px] text-white font-bold no-underline transition-all hover:-translate-y-0.5">
-						documentation
-					</a>
+			<header class="relative pt-32 md:pt-40 pb-12 md:pb-20 px-4 md:px-[5%] overflow-hidden">
+				<!-- Green glow background -->
+				<div class="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[radial-gradient(circle,rgba(84,205,76,0.18)_0%,transparent_70%)] blur-[80px] pointer-events-none z-0"></div>
+				<div class="absolute top-[10%] -right-[5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-[radial-gradient(circle,rgba(84,205,76,0.08)_0%,transparent_70%)] blur-[80px] pointer-events-none z-0"></div>
+
+				<div class="relative z-[1] flex flex-col md:flex-row items-center justify-center gap-8 md:gap-6 max-w-[1000px] mx-auto">
+					<!-- Left: Text Content -->
+					<div class="flex-1 max-w-full md:max-w-[500px] pl-0 md:pl-4 flex flex-col items-center md:items-start text-center md:text-left">
+						<h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-black text-white leading-[1.1] mb-1 tracking-tight">
+							TeaLinux LYLIA
+						</h1>
+						<p class="text-[clamp(2.25rem,4.5vw,3.25rem)] font-bold italic text-[#54CD4C] leading-[1.15] mb-6 -tracking-[0.01em]">
+							"nikmatnya<br/>sebuah racikan"
+						</p>
+						<p class="text-base text-slate-400 leading-relaxed mb-8 max-w-full md:max-w-[420px]">
+							An Arch - based Linux distribution crafted by DOSCOM for developers and education.
+						</p>
+						<div class="flex gap-4 flex-wrap justify-center md:justify-start">
+							<a href="/download" class="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] border-2 border-white/20 bg-white/[0.06] backdrop-blur-[20px] text-white text-sm font-semibold no-underline whitespace-nowrap transition-all hover:border-[#54CD4C]/50 hover:bg-[#54CD4C]/10 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(84,205,76,0.15)]">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+								</svg>
+								Download Now
+							</a>
+							<a href="/docs" class="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] border-2 border-white/20 bg-white/[0.06] backdrop-blur-[20px] text-white text-sm font-semibold no-underline whitespace-nowrap transition-all hover:border-[#54CD4C]/50 hover:bg-[#54CD4C]/10 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(84,205,76,0.15)]">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+								</svg>
+								View Documentation
+							</a>
+						</div>
+					</div>
+
+					<!-- Right: 3D Logo -->
+					<div class="flex-1 flex items-center justify-center max-w-[300px] md:max-w-[500px]">
+						<div class="relative w-full max-w-[380px] [perspective:800px]">
+							<div class="absolute -bottom-[10%] left-[10%] right-[10%] h-[40%] bg-[radial-gradient(ellipse,rgba(0,0,0,0.5)_0%,transparent_70%)] blur-[20px] z-0"></div>
+							<div class="hero-logo-card relative z-[1]">
+								<img src="/img/logo-gede.webp" alt="TeaLinuxOS Logo" class="w-full h-auto block drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)]" />
+							</div>
+						</div>
+					</div>
 				</div>
 			</header>
 
-			<section class="relative flex w-full max-w-[883.515px] flex-col justify-center items-center gap-[14px] my-[60px] px-6 mx-auto">
+			<style>
+				.hero-logo-card {
+					transform: rotateY(-12deg) rotateX(5deg);
+					transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+					animation: logoFloat 6s ease-in-out infinite;
+				}
+				.hero-logo-card:hover {
+					transform: rotateY(-4deg) rotateX(2deg) scale(1.03);
+				}
+				@keyframes logoFloat {
+					0%, 100% { transform: rotateY(-12deg) rotateX(5deg) translateY(0); }
+					50% { transform: rotateY(-12deg) rotateX(5deg) translateY(-12px); }
+				}
+				@media (max-width: 768px) {
+					.hero-logo-card {
+						transform: rotateY(-8deg) rotateX(3deg);
+					}
+					@keyframes logoFloat {
+						0%, 100% { transform: rotateY(-8deg) rotateX(3deg) translateY(0); }
+						50% { transform: rotateY(-8deg) rotateX(3deg) translateY(-10px); }
+					}
+				}
+			</style>
+
+			<section class="relative flex w-full max-w-[883.515px] flex-col justify-center items-center gap-3 md:gap-[14px] my-10 md:my-[60px] px-4 md:px-6 mx-auto">
 				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(84,205,76,0.15)_0%,transparent_70%)] pointer-events-none -z-10"></div>
 
-				<h2 class="text-4xl font-bold text-white mb-2">What is TeaLinuxOS ?</h2>
+				<h2 class="text-2xl md:text-4xl font-bold text-white mb-2">What is TeaLinuxOS ?</h2>
 				
 				<div class="flex items-center w-full gap-4 my-4">
 					<div class="h-[1px] bg-white/20 flex-1"></div>
@@ -44,19 +95,19 @@ import Footer from '../components/organisms/Footer.astro';
 					<div class="h-[1px] bg-white/20 flex-1"></div>
 				</div>
 
-				<p class="text-center text-lg text-slate-300 mb-4 max-w-3xl">
+				<p class="text-center text-sm md:text-lg text-slate-300 mb-4 max-w-3xl">
 					TeaLinuxOS is a community-driven Linux distribution developed by DOSCOM. Built on top of Arch Linux, it offers speed, simplicity, and freedom with a touch of delightful design.
 				</p>
 
-				<div class="flex min-h-[100px] p-8 md:px-[124px] md:py-[38px] justify-center items-center gap-[10px] self-stretch rounded-[15px] border-[5px] border-white/30 bg-white/10 backdrop-blur-[20px]">
-					<p class="text-white italic text-lg text-center">"Developed collaboratively to empower education and open-source communities."</p>
+				<div class="flex min-h-[80px] md:min-h-[100px] p-4 md:p-8 md:px-[124px] md:py-[38px] justify-center items-center gap-[10px] self-stretch rounded-[15px] border-[3px] md:border-[5px] border-white/30 bg-white/10 backdrop-blur-[20px]">
+					<p class="text-white italic text-sm md:text-lg text-center">"Developed collaboratively to empower education and open-source communities."</p>
 				</div>
 			</section>
 
-			<section class="relative py-[60px] px-[5%] max-w-[1240px] mx-auto text-center">
+			<section class="relative py-10 md:py-[60px] px-4 md:px-[5%] max-w-[1240px] mx-auto text-center">
 				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[800px] bg-[radial-gradient(circle,rgba(84,205,76,0.1)_0%,transparent_70%)] pointer-events-none -z-10"></div>
 
-				<h2 class="text-3xl md:text-4xl font-bold text-[#54CD4C] mb-12">Why Choose TeaLinuxOS ?</h2>
+				<h2 class="text-2xl md:text-4xl font-bold text-[#54CD4C] mb-8 md:mb-12">Why Choose TeaLinuxOS ?</h2>
 				
 				<div class="flex flex-nowrap overflow-x-auto snap-x snap-mandatory justify-start md:justify-center gap-6 md:gap-8 pb-12 md:pb-0 px-[5%] md:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 					<FeatureCard 
@@ -82,7 +133,7 @@ import Footer from '../components/organisms/Footer.astro';
 				</div>
 			</section>
 
-			<section class="relative w-full max-w-[1240px] mx-auto py-[80px] px-[5%] bg-black text-center overflow-hidden">
+			<section class="relative w-full max-w-[1240px] mx-auto py-12 md:py-[80px] px-4 md:px-[5%] bg-black text-center overflow-hidden">
 				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(84,205,76,0.15)_0%,transparent_70%)] pointer-events-none"></div>
 
 			<h2 class="text-3xl md:text-4xl font-bold text-white mb-3">
@@ -99,7 +150,7 @@ import Footer from '../components/organisms/Footer.astro';
 				Select the perfect TeaLinuxOS edition for your need
 			</p>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto place-items-center">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto place-items-center px-4 md:px-0">
 
 				<!-- COSMIC -->
 				<EditionCard>
