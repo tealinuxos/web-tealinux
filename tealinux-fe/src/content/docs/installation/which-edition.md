@@ -18,15 +18,15 @@ You can [download](https://pinguin.dinus.ac.id/iso/tealinuxos/TeaLinuxOS-Arch/20
 
 ## Cosmic Edition
 
-<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
-<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/cosmic.webp" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/cosmic2.png" alt="TeaLinux Installer Preview" class="mb-6" />
 
 The Cosmic Edition of TeaLinuxOS is built with a focus on modern design and ease of use. Featuring a sleek interface, smooth animations, and intuitive layout, it’s perfect for users who want a beautiful and distraction-free desktop experience. This edition is especially recommended for students, content creators, and professionals who value both style and functionality.
 
 ## KDE Edition
 
-<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
-<img src="/img/installer.webp" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/kde1.webp" alt="TeaLinux Installer Preview" class="mb-6" />
+<img src="/img/kde2.webp" alt="TeaLinux Installer Preview" class="mb-6" />
 
 The KDE Edition offers a rich and flexible desktop environment powered by KDE Plasma. Known for its high degree of customizability, KDE Edition is ideal for power users, developers, and anyone who likes to tweak their system to fit their workflow. It provides powerful tools out of the box, while still maintaining a clean and efficient user experience.
 
