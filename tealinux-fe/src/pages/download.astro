@@ -10,25 +10,31 @@ import Footer from '../components/organisms/Footer.astro';
 		<div class="relative z-[1]">
 			<Navbar />
 
-			<header class="relative py-[80px] px-[5%] pt-40 text-center max-w-[900px]  mx-auto">
+			<header class="relative py-[80px] px-[5%] pt-40 text-center mx-auto overflow-hidden">
+				<!-- Green glow background -->
+				<div class="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[radial-gradient(circle,rgba(84,205,76,0.18)_0%,transparent_70%)] blur-[80px] pointer-events-none z-0"></div>
+				<div class="absolute top-[10%] -right-[5%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] bg-[radial-gradient(circle,rgba(84,205,76,0.08)_0%,transparent_70%)] blur-[80px] pointer-events-none z-0"></div>
 
-				<div class="flex justify-center mb-6">
-					<div class="w-16 h-16 flex items-center justify-center">
-						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-							<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-						</svg>
+				<div class="relative z-[1] max-w-[900px] mx-auto">
+					<div class="flex justify-center mb-6">
+						<div class="w-16 h-16 flex items-center justify-center">
+							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+							</svg>
+						</div>
 					</div>
-				</div>
 
-				<h1 class="text-4xl md:text-6xl font-black mb-6 text-[#54CD4C]">
-					Download TeaLinuxOS
-				</h1>
-				<p class="text-lg text-white font-medium max-w-2xl mx-auto opacity-90">
-					Choose your edition and experience the delight of an open-source creation
-				</p>
+					<h1 class="text-4xl md:text-6xl font-black mb-6 text-[#54CD4C]">
+						Download TeaLinuxOS
+					</h1>
+					<p class="text-lg text-white font-medium max-w-2xl mx-auto opacity-90">
+						Choose your edition and experience the delight of an open-source creation
+					</p>
+				</div>
 			</header>
 
 			<section class="relative py-12 px-[5%] max-w-[1200px] mx-auto">
+				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(84,205,76,0.15)_0%,transparent_70%)] pointer-events-none -z-10"></div>
 
 				<div class="flex flex-col md:flex-row gap-8  justify-center items-center">
 					<!-- COSMIC -->
@@ -150,6 +156,7 @@ import Footer from '../components/organisms/Footer.astro';
 
 			<!-- How to Install Section -->
 			<section class="relative py-12 px-[5%] flex flex-col items-center">
+				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(84,205,76,0.15)_0%,transparent_70%)] pointer-events-none -z-10"></div>
 			<h2 class="text-3xl md:text-4xl font-bold p-2 text-white mb-3">
 				How to Install
 				<span class="inline-block relative">
@@ -228,6 +235,7 @@ import Footer from '../components/organisms/Footer.astro';
 
 			<!-- Support The Project Section -->
 			<section class="relative py-24 px-[5%] flex flex-col items-center text-center">
+				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(circle,rgba(84,205,76,0.15)_0%,transparent_70%)] pointer-events-none -z-10"></div>
 				<h2 class="text-3xl md:text-4xl font-bold text-[#54CD4C] mb-4">
 					Support The Project
 				</h2>
