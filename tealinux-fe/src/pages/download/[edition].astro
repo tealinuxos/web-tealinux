@@ -2,6 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/organisms/Navbar.astro';
 import Footer from '../../components/organisms/Footer.astro';
+import EditionCard from '../../components/molecules/EditionCard.astro';
+import EditionScreenshot from '../../components/molecules/EditionScreenshot.astro';
+import EditionSpecRow from '../../components/molecules/EditionSpecRow.astro';
+import RequirementItem from '../../components/molecules/RequirementItem.astro';
 
 const editions: Record<string, {
   name: string;
@@ -64,141 +68,87 @@ if (!data) {
     <div class="relative z-[1]">
       <Navbar />
 
-
       <!-- Edition Detail Section -->
       <section class="relative py-12 px-[5%] pt-40 max-w-[1100px] mx-auto">
-        <div class="edition-detail-card">
-          <div class="edition-layout">
+        <EditionCard class="!max-w-full !min-h-0 !p-0 !gap-0">
+          <!-- Main Layout: Screenshot + Info -->
+          <div class="flex flex-col md:flex-row gap-10 md:gap-12 p-6 md:p-10">
             <!-- Screenshot Side -->
-            <div class="edition-screenshot-wrapper">
-              <div class="edition-screenshot-frame">
-                <img 
-                  src={data.screenshot} 
-                  alt={`${data.name} Desktop`}
-                  class="edition-screenshot"
-                />
-                <!-- Play button overlay -->
-                <div class="screenshot-overlay">
-                  <div class="play-button">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                      <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <EditionScreenshot screenshot={data.screenshot} name={data.name} />
 
             <!-- Info Side -->
-            <div class="edition-info">
-              <div class="edition-header">
-                <h1 class="edition-title">
-                  Resep Tea Linux
-                  <span class="tea-icon">🍃</span>
+            <div class="flex-1 min-w-0 flex flex-col gap-6">
+              <!-- Header -->
+              <div class="flex flex-col gap-3">
+                <h1 class="text-[24px] font-semibold m-0">
+                  <span class="inline-block relative">
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 159 32" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                      <path d="M8.08859 2.75138C8.62801 1.10969 10.1607 0 11.8887 0H154.27C156.899 0 158.813 2.49208 158.135 5.03172L151.728 29.0317C151.261 30.7822 149.675 32 147.863 32H4.00301C1.28 32 -0.647121 29.3383 0.202877 26.7514L8.08859 2.75138Z" fill="#54CD4C"/>
+                    </svg>
+                    <span class="relative z-10 px-4 py-1 text-black font-bold">{edition!.toUpperCase()}</span>
+                  </span>
+                  <span class="text-white ml-1">Edition</span>
                 </h1>
-                <span class="edition-badge">{data.displayServer}</span>
+                <span class="inline-block w-fit px-3.5 py-1 rounded-full bg-[#54CD4C]/15 text-[#54CD4C] text-xs font-semibold tracking-wider border border-[#54CD4C]/30">
+                  {data.displayServer}
+                </span>
               </div>
 
-              <div class="edition-specs">
-                <div class="spec-row">
-                  <span class="spec-label">Name</span>
-                  <span class="spec-value">: {data.name}</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">Codename</span>
-                  <span class="spec-value">: {data.codename}</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">Based On</span>
-                  <span class="spec-value">: {data.basedOn}</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">Kernel Version</span>
-                  <span class="spec-value">: {data.kernelVersion}</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">Release Date</span>
-                  <span class="spec-value">: {data.releaseDate}</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">Desktop Environment</span>
-                  <span class="spec-value">: {data.desktopEnvironment}</span>
-                </div>
-                <div class="spec-row">
-                  <span class="spec-label">Size</span>
-                  <span class="spec-value">: {data.size}</span>
-                </div>
+              <!-- Specs -->
+              <div class="flex flex-col gap-3">
+                <EditionSpecRow label="Name" value={data.name} />
+                <EditionSpecRow label="Codename" value={data.codename} />
+                <EditionSpecRow label="Based On" value={data.basedOn} />
+                <EditionSpecRow label="Kernel Version" value={data.kernelVersion} />
+                <EditionSpecRow label="Release Date" value={data.releaseDate} />
+                <EditionSpecRow label="Desktop Environment" value={data.desktopEnvironment} />
+                <EditionSpecRow label="Size" value={data.size} />
               </div>
-
-
             </div>
           </div>
 
           <!-- Separator -->
-          <div class="edition-separator"></div>
+          <div class="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mx-6 md:mx-10"></div>
 
           <!-- Download Button -->
-          <div class="edition-download-section">
-            <button 
+          <div class="flex flex-col items-center gap-4 px-6 md:px-10 pt-8 pb-6 md:pb-10">
+            <button
               id="download-btn"
-              data-edition={edition!.toUpperCase()} 
+              data-edition={edition!.toUpperCase()}
               data-download-url={data.downloadUrl}
-              class="download-edition-btn group"
+              class="flex items-center justify-center gap-2.5 py-3.5 px-10 min-w-[240px] rounded-full bg-[#54CD4C] text-black text-[15px] font-bold border-none cursor-pointer transition-all duration-300 hover:bg-[#45b83f] hover:shadow-[0_0_30px_rgba(84,205,76,0.4)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" />
               </svg>
               <span>Direct Download</span>
             </button>
-            <p class="download-note">
+            <p class="text-xs text-slate-500 m-0">
               File: tealinux-celia-{edition}-x86_64.iso • {data.size}
             </p>
           </div>
-        </div>
+        </EditionCard>
       </section>
 
       <!-- System Requirements Section -->
       <section class="relative py-12 px-[5%] max-w-[1100px] mx-auto">
-        <div class="requirements-card">
-          <h2 class="text-xl font-bold text-white mb-6">System Requirements</h2>
-          <div class="requirements-grid">
-            <div class="requirement-item">
-              <div class="req-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><rect x="4" y="4" width="16" height="12" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
-              </div>
-              <div>
-                <p class="req-label">Processor</p>
-                <p class="req-value">x86_64 compatible (64-bit)</p>
-              </div>
-            </div>
-            <div class="requirement-item">
-              <div class="req-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><path d="M6 19v-8a6 6 0 0112 0v8"/><rect x="4" y="19" width="16" height="2" rx="1"/></svg>
-              </div>
-              <div>
-                <p class="req-label">RAM</p>
-                <p class="req-value">Minimum 2 GB (4 GB recommended)</p>
-              </div>
-            </div>
-            <div class="requirement-item">
-              <div class="req-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-              </div>
-              <div>
-                <p class="req-label">Storage</p>
-                <p class="req-value">Minimum 20 GB free disk space</p>
-              </div>
-            </div>
-            <div class="requirement-item">
-              <div class="req-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              </div>
-              <div>
-                <p class="req-label">USB Drive</p>
-                <p class="req-value">4 GB or larger for bootable media</p>
-              </div>
-            </div>
+        <EditionCard class="!max-w-full !min-h-0">
+          <h2 class="text-xl font-bold text-white mb-6 m-0">System Requirements</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <RequirementItem label="Processor" value="x86_64 compatible (64-bit)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><rect x="4" y="4" width="16" height="12" rx="2" /><line x1="2" y1="20" x2="22" y2="20" /></svg>
+            </RequirementItem>
+            <RequirementItem label="RAM" value="Minimum 2 GB (4 GB recommended)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><path d="M6 19v-8a6 6 0 0112 0v8" /><rect x="4" y="19" width="16" height="2" rx="1" /></svg>
+            </RequirementItem>
+            <RequirementItem label="Storage" value="Minimum 20 GB free disk space">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" y1="9" x2="9.01" y2="9" /><line x1="15" y1="9" x2="15.01" y2="9" /></svg>
+            </RequirementItem>
+            <RequirementItem label="USB Drive" value="4 GB or larger for bootable media">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#54CD4C" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+            </RequirementItem>
           </div>
-        </div>
+        </EditionCard>
       </section>
 
       <Footer />
@@ -235,302 +185,3 @@ if (!data) {
     });
   </script>
 </Layout>
-
-<style>
-  /* Edition Detail Card */
-  .edition-detail-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    overflow: hidden;
-  }
-
-  .edition-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    padding: 2.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .edition-layout {
-      flex-direction: row;
-      gap: 3rem;
-    }
-  }
-
-  /* Screenshot */
-  .edition-screenshot-wrapper {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .edition-screenshot-frame {
-    position: relative;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    background: #111;
-    aspect-ratio: 16 / 10;
-  }
-
-  .edition-screenshot {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .edition-screenshot-frame:hover .edition-screenshot {
-    transform: scale(1.03);
-  }
-
-  .screenshot-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .edition-screenshot-frame:hover .screenshot-overlay {
-    opacity: 1;
-  }
-
-  .play-button {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: rgba(84, 205, 76, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 0 30px rgba(84, 205, 76, 0.4);
-    padding-left: 4px;
-  }
-
-  /* Info Section */
-  .edition-info {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .edition-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .edition-title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: #54CD4C;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-  }
-
-  .tea-icon {
-    font-size: 1.5rem;
-  }
-
-  .edition-badge {
-    display: inline-block;
-    width: fit-content;
-    padding: 4px 14px;
-    border-radius: 999px;
-    background: rgba(84, 205, 76, 0.15);
-    color: #54CD4C;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    border: 1px solid rgba(84, 205, 76, 0.3);
-  }
-
-  /* Specs Table */
-  .edition-specs {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .spec-row {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.6;
-  }
-
-  .spec-label {
-    color: #54CD4C;
-    font-weight: 600;
-    min-width: 150px;
-    flex-shrink: 0;
-  }
-
-  .spec-value {
-    color: #e2e8f0;
-  }
-
-  @media (max-width: 640px) {
-    .spec-label {
-      min-width: 120px;
-      font-size: 0.8125rem;
-    }
-    .spec-value {
-      font-size: 0.8125rem;
-    }
-  }
-
-  /* Features */
-  .edition-features {
-    padding-top: 0.5rem;
-  }
-
-  .features-title {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin: 0 0 0.75rem 0;
-  }
-
-  .features-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    font-size: 0.8125rem;
-    color: #cbd5e1;
-  }
-
-  /* Separator */
-  .edition-separator {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1) 20%, rgba(255,255,255,0.1) 80%, transparent);
-    margin: 0 2.5rem;
-  }
-
-  /* Download Section */
-  .edition-download-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem 2.5rem 2.5rem;
-  }
-
-  .download-edition-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    padding: 0.875rem 2.5rem;
-    min-width: 240px;
-    border-radius: 999px;
-    background: #54CD4C;
-    color: #000;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-
-  .download-edition-btn:hover {
-    background: #45b83f;
-    box-shadow: 0 0 30px rgba(84, 205, 76, 0.4);
-    transform: translateY(-1px);
-  }
-
-  .download-edition-btn:active {
-    transform: translateY(0);
-  }
-
-  .download-edition-btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-
-  .download-note {
-    font-size: 0.75rem;
-    color: #64748b;
-    margin: 0;
-  }
-
-  /* Requirements Card */
-  .requirements-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 2rem;
-  }
-
-  .requirements-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  @media (min-width: 640px) {
-    .requirements-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .requirement-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .req-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: rgba(84, 205, 76, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .req-label {
-    font-size: 0.75rem;
-    color: #64748b;
-    margin: 0 0 0.25rem 0;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-  }
-
-  .req-value {
-    font-size: 0.875rem;
-    color: #e2e8f0;
-    margin: 0;
-  }
-</style>
