@@ -1,0 +1,26 @@
+# ============================================
+# Dockerfile.prod - Menggunakan pre-built dist
+# ============================================
+# Gunakan ini jika sudah build di local/CI
+# Lebih cepat karena skip npm install & build step
+
+FROM node:20-alpine AS runtime
+
+WORKDIR /app
+
+# Copy hasil build yang sudah jadi
+COPY dist ./dist
+COPY package.json ./
+
+# Install production dependencies saja (untuk runtime)
+RUN npm install --production --ignore-scripts
+
+# Set environment
+ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=4321
+
+EXPOSE 4321
+
+# Start the Astro SSR server
+CMD ["node", "./dist/server/entry.mjs"]
