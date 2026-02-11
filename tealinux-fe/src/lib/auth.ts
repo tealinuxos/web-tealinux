@@ -67,14 +67,36 @@ export function isAuthenticated(): boolean {
     return !!getToken();
 }
 
+// Check if user is admin
+export function isAdmin(): boolean {
+    const user = getCurrentUser();
+    return user !== null && user.role === 'admin';
+}
+
 // Save auth data (tokens + user)
 export function saveAuthData(tokens: AuthTokens, user: User): void {
     setToken(tokens.access_token);
     setRefreshToken(tokens.refresh_token);
     setCurrentUser(user);
+
+    // Also save to cookies for server-side middleware access
+    if (typeof document !== 'undefined') {
+        // Set cookies with 7 days expiry
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+
+        document.cookie = `tealinux_token=${tokens.access_token}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+        document.cookie = `tealinux_user=${encodeURIComponent(JSON.stringify(user))}; path=/; expires=${expires.toUTCString()}; SameSite=Lax`;
+    }
 }
 
 // Clear all auth data
 export function clearAuthData(): void {
     removeTokens();
+
+    // Also clear cookies
+    if (typeof document !== 'undefined') {
+        document.cookie = 'tealinux_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'tealinux_user=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    }
 }

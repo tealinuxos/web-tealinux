@@ -4,6 +4,8 @@ import Navbar from '../components/organisms/Navbar.astro';
 import FeatureCard from '../components/molecules/FeatureCard.astro';
 import EditionCard from '../components/molecules/EditionCard.astro';
 import Footer from '../components/organisms/Footer.astro';
+
+export const prerender = true;
 ---
 
 <Layout title="TeaLinux Forum - Community Discussion">
@@ -21,16 +23,19 @@ import Footer from '../components/organisms/Footer.astro';
 				<div class="relative z-[1] flex flex-col md:flex-row items-center justify-center gap-8 md:gap-6 max-w-[1000px] mx-auto">
 					<!-- Left: Text Content -->
 					<div class="flex-1 max-w-full md:max-w-[500px] pl-0 md:pl-4 flex flex-col items-center md:items-start text-center md:text-left">
-						<h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-black text-white leading-[1.1] mb-1 tracking-tight">
-							TeaLinux LYLIA
+						<h1 class="text-[clamp(2.5rem,5vw,3.5rem)] font-black text-white leading-[1.1] mb-1 tracking-tight hero-title" aria-label="TeaLinux LYLIA">
+							<span class="inline-block overflow-hidden"><span class="inline-block translate-y-full">TeaLinux</span></span>
+							<span class="inline-block overflow-hidden"><span class="inline-block translate-y-full">LYLIA</span></span>
 						</h1>
-						<p class="text-[clamp(2.25rem,4.5vw,3.25rem)] font-bold italic text-[#54CD4C] leading-[1.15] mb-6 -tracking-[0.01em]">
-							"nikmatnya<br/>sebuah racikan"
+						<p class="text-[clamp(2.25rem,4.5vw,3.25rem)] font-bold italic text-[#54CD4C] leading-[1.15] mb-6 -tracking-[0.01em] hero-tagline" aria-label="nikmatnya sebuah racikan">
+							<span class="inline-block overflow-hidden"><span class="inline-block translate-y-full">"nikmatnya</span></span><br/>
+							<span class="inline-block overflow-hidden"><span class="inline-block translate-y-full">sebuah</span></span>
+							<span class="inline-block overflow-hidden"><span class="inline-block translate-y-full">racikan"</span></span>
 						</p>
-						<p class="text-base text-slate-400 leading-relaxed mb-8 max-w-full md:max-w-[420px]">
+						<p class="text-base text-slate-400 leading-relaxed mb-8 max-w-full md:max-w-[420px] hero-description opacity-0">
 							An Arch - based Linux distribution crafted by DOSCOM for developers and education.
 						</p>
-						<div class="flex gap-4 flex-wrap justify-center md:justify-start">
+						<div class="flex gap-4 flex-wrap justify-center md:justify-start hero-ctas opacity-0">
 							<a href="/download" class="inline-flex items-center gap-2 px-6 py-3 rounded-[10px] border-2 border-white/20 bg-white/[0.06] backdrop-blur-[20px] text-white text-sm font-semibold no-underline whitespace-nowrap transition-all hover:border-[#54CD4C]/50 hover:bg-[#54CD4C]/10 hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(84,205,76,0.15)]">
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
 									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
@@ -173,12 +178,12 @@ import Footer from '../components/organisms/Footer.astro';
 						</p>
 					</div>
 
-					<button class="flex h-[42px] w-full justify-center items-center gap-2 rounded-2xl bg-[#54CD4C] hover:bg-[#45b83f] transition-all shadow-[0_0_15px_rgba(84,205,76,0.3)]">
+					<a href="/download/cosmic" class="flex h-[42px] w-full justify-center items-center gap-2 rounded-2xl bg-[#54CD4C] hover:bg-[#45b83f] transition-all shadow-[0_0_15px_rgba(84,205,76,0.3)] no-underline">
 						<svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
 							<path d="M12.75 2.75C12.75 2.33516 12.4148 2 12 2C11.5852 2 11.25 2.33516 11.25 2.75V8.43828L9.52969 6.71797C9.23672 6.425 8.76094 6.425 8.46797 6.71797C8.175 7.01094 8.175 7.48672 8.46797 7.77969L11.468 10.7797C11.7609 11.0727 12.2367 11.0727 12.5297 10.7797L15.5297 7.77969C15.8227 7.48672 15.8227 7.01094 15.5297 6.71797C15.2367 6.425 14.7609 6.425 14.468 6.71797L12.75 8.43828V2.75ZM7.5 10.25C6.67266 10.25 6 10.9227 6 11.75V12.5C6 13.3273 6.67266 14 7.5 14H16.5C17.3273 14 18 13.3273 18 12.5V11.75C18 10.9227 17.3273 10.25 16.5 10.25H14.1211L13.0594 11.3117C12.4734 11.8977 11.5242 11.8977 10.9383 11.3117L9.87891 10.25H7.5Z" fill="black"/>
 						</svg>
 						<span class="text-black text-[14px] font-semibold">Download COSMIC</span>
-					</button>
+					</a>
 				</EditionCard>
 
 				<!-- PLASMA -->
@@ -202,12 +207,12 @@ import Footer from '../components/organisms/Footer.astro';
 						</p>
 					</div>
 
-					<button class="flex h-[42px] w-full justify-center items-center gap-2 rounded-2xl bg-[#54CD4C] hover:bg-[#45b83f] transition-all shadow-[0_0_15px_rgba(84,205,76,0.3)]">
+					<a href="/download/plasma" class="flex h-[42px] w-full justify-center items-center gap-2 rounded-2xl bg-[#54CD4C] hover:bg-[#45b83f] transition-all shadow-[0_0_15px_rgba(84,205,76,0.3)] no-underline">
 						<svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
 							<path d="M12.75 2.75C12.75 2.33516 12.4148 2 12 2C11.5852 2 11.25 2.33516 11.25 2.75V8.43828L9.52969 6.71797C9.23672 6.425 8.76094 6.425 8.46797 6.71797C8.175 7.01094 8.175 7.48672 8.46797 7.77969L11.468 10.7797C11.7609 11.0727 12.2367 11.0727 12.5297 10.7797L15.5297 7.77969C15.8227 7.48672 15.8227 7.01094 15.5297 6.71797C15.2367 6.425 14.7609 6.425 14.468 6.71797L12.75 8.43828V2.75ZM7.5 10.25C6.67266 10.25 6 10.9227 6 11.75V12.5C6 13.3273 6.67266 14 7.5 14H16.5C17.3273 14 18 13.3273 18 12.5V11.75C18 10.9227 17.3273 10.25 16.5 10.25H14.1211L13.0594 11.3117C12.4734 11.8977 11.5242 11.8977 10.9383 11.3117L9.87891 10.25H7.5Z" fill="black"/>
 						</svg>
 						<span class="text-black text-[14px] font-semibold">Download PLASMA</span>
-					</button>
+					</a>
 				</EditionCard>
 
 			</div>
@@ -218,5 +223,38 @@ import Footer from '../components/organisms/Footer.astro';
 		<Footer />
 	</main>
 </Layout>
+
+<script>
+	import { gsap } from 'gsap';
+
+	window.addEventListener('load', () => {
+		const tl = gsap.timeline({ defaults: { ease: "power4.out", duration: 1 } });
+
+		// Animate H1 words
+		tl.to(".hero-title span span", {
+			y: "0%",
+			stagger: 0.1,
+			delay: 0.2
+		})
+		// Animate Tagline words
+		.to(".hero-tagline span span", {
+			y: "0%",
+			stagger: 0.1
+		}, "-=0.7")
+		// Fade in Description
+		.to(".hero-description", {
+			opacity: 1,
+			y: 0,
+			duration: 0.8
+		}, "-=0.6")
+		// Fade in Buttons
+		.to(".hero-ctas", {
+			opacity: 1,
+			y: 0,
+			stagger: 0.1,
+			duration: 0.8
+		}, "-=0.6");
+	});
+</script>
 
 

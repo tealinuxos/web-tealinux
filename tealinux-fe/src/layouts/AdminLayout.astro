@@ -98,29 +98,43 @@ const { title = "Admin Dashboard - TeaLinuxOS" } = Astro.props;
     </div>
 
     <script>
-      import { isAuthenticated, getCurrentUser, clearAuthData } from '../lib/auth';
+      // Check admin access on page load
+      async function checkAdminAccess() {
+        try {
+          const response = await fetch('/api/auth/verify');
+          const result = await response.json();
 
-      function checkAdminAccess() {
-        if (!isAuthenticated()) {
-          window.location.href = '/login';
-          return;
+          if (!result.authenticated) {
+            window.location.href = '/login?error=unauthorized';
+            return;
+          }
+
+          if (result.user.role !== 'admin') {
+            window.location.href = '/?error=forbidden';
+            return;
+          }
+
+          // Update UI with user info
+          const adminAvatar = document.getElementById('adminAvatar');
+          const adminName = document.getElementById('adminName');
+          if (adminAvatar) adminAvatar.textContent = result.user.name.charAt(0).toUpperCase();
+          if (adminName) adminName.textContent = result.user.name;
+
+        } catch (error) {
+          console.error('[Admin] Access check failed:', error);
+          window.location.href = '/login?error=unauthorized';
         }
-
-        const user = getCurrentUser();
-        if (!user || user.role !== 'admin') {
-          window.location.href = '/';
-          return;
-        }
-
-        const adminAvatar = document.getElementById('adminAvatar');
-        const adminName = document.getElementById('adminName');
-        if (adminAvatar) adminAvatar.textContent = user.name.charAt(0).toUpperCase();
-        if (adminName) adminName.textContent = user.name;
       }
 
-      document.getElementById('logoutBtn')?.addEventListener('click', () => {
-        clearAuthData();
-        window.location.href = '/login';
+      // Logout handler
+      document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+        try {
+          await fetch('/api/auth/logout', { method: 'POST' });
+          window.location.href = '/login';
+        } catch (error) {
+          console.error('[Admin] Logout failed:', error);
+          window.location.href = '/login';
+        }
       });
 
       checkAdminAccess();

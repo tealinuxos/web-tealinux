@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'static',
+  output: 'server',
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',

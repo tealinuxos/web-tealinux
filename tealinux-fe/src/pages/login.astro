@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+export const prerender = true;
 ---
 
 <Layout title="Login - TeaLinux Forum">
@@ -126,15 +128,28 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-	import { login } from '../lib/api';
-	import { saveAuthData } from '../lib/auth';
-
 	const loginForm = document.getElementById('loginForm') as HTMLFormElement;
 	const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
 	const loader = document.getElementById('loader');
 	const message = document.getElementById('message');
 	const togglePassword = document.getElementById('togglePassword');
 	const passwordInput = document.getElementById('password') as HTMLInputElement;
+
+	// Check for error/redirect params in URL
+	const urlParams = new URLSearchParams(window.location.search);
+	const error = urlParams.get('error');
+	const redirect = urlParams.get('redirect');
+
+	if (error && message) {
+		const errorMessages: Record<string, string> = {
+			'expired': 'Your session has expired. Please login again.',
+			'invalid': 'Invalid authentication token. Please login again.',
+			'unauthorized': 'Unauthorized access. Please login.',
+			'forbidden': 'You do not have permission to access that page.'
+		};
+		message.textContent = errorMessages[error] || 'Please login to continue.';
+		message.classList.add('error');
+	}
 
 	// Toggle password visibility
 	togglePassword?.addEventListener('click', () => {
@@ -159,26 +174,32 @@ import Layout from '../layouts/Layout.astro';
 		}
 
 		try {
-			const result = await login(email, password);
-			
-			// Save auth data (tokens + user)
-			saveAuthData(
-				{ access_token: result.access_token, refresh_token: result.refresh_token },
-				result.user
-			);
+			// Call JWT login API
+			const response = await fetch('/api/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ email, password })
+			});
+
+			const result = await response.json();
+
+			if (!response.ok || !result.success) {
+				throw new Error(result.error || 'Login failed');
+			}
 			
 			if (message) {
 				message.textContent = 'Login successful! Redirecting...';
 				message.classList.add('success');
 			}
 
+			// Redirect after successful login
 			setTimeout(() => {
-				if (result.user.role === 'admin') {
-					window.location.href = '/admin';
-				} else {
-					window.location.href = '/';
-				}
-			}, 1500);
+				const redirectUrl = redirect || (result.user.role === 'admin' ? '/admin' : '/');
+				window.location.href = redirectUrl;
+			}, 1000);
+
 		} catch (error) {
 			if (message) {
 				message.textContent = error instanceof Error ? error.message : 'Login failed';
