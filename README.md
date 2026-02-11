@@ -46,9 +46,14 @@
 | **JWT** | 5.3.0 | JSON Web Token untuk autentikasi |
 | **OAuth2** | 0.34.0 | Autentikasi dengan provider eksternal |
 
-### DevOps
-- **Docker** - Containerization untuk PostgreSQL
-- **Docker Compose** - Orchestration untuk development
+### DevOps & Infrastructure
+| Teknologi | Deskripsi |
+|-----------|-----------|
+| **Docker** | Containerization untuk semua services |
+| **Docker Compose** | Orchestration untuk development & production |
+| **Nginx** | Reverse proxy & load balancer |
+| **Let's Encrypt** | SSL/TLS certificates (Certbot) |
+| **GitHub Actions** | CI/CD pipeline automation |
 
 ---
 
@@ -211,6 +216,65 @@ cd tealinuxbe
 go build -o tealinux-api cmd/main.go
 ./tealinux-api
 ```
+
+---
+
+## 🚢 Deployment & CI/CD
+
+### Quick Deploy (Development with Docker)
+
+```bash
+# Start all services with hot-reload
+docker compose -f docker-compose.dev.yml up -d
+
+# View logs
+docker compose -f docker-compose.dev.yml logs -f
+
+# Stop all services
+docker compose -f docker-compose.dev.yml down
+```
+
+### Production Deployment to VPS
+
+**Automated CI/CD Pipeline:**
+- ✅ Automatic testing on push
+- ✅ Docker image building to GitHub Container Registry
+- ✅ Automated deployment to VPS via SSH
+- ✅ Health checks and rollback support
+
+**Quick Deploy Commands:**
+```bash
+# On VPS - Quick deploy
+./deploy.sh
+
+# Health check
+./health-check.sh
+
+# Database backup
+./backup-db.sh
+
+# SSL setup (first time)
+./setup-ssl.sh
+```
+
+**📚 Detailed Guides:**
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Complete deployment guide (VPS setup, SSL, monitoring)
+- **[QUICK_REFERENCE.md](./QUICK_REFERENCE.md)** - Quick command reference
+
+**GitHub Secrets Required:**
+| Secret | Description |
+|--------|-------------|
+| `VPS_HOST` | VPS IP address |
+| `VPS_USERNAME` | SSH username |
+| `VPS_SSH_KEY` | Private SSH key |
+| `VPS_PROJECT_PATH` | Project path (e.g., `/opt/tealinux`) |
+
+**CI/CD Pipeline Stages:**
+1. 🧪 Test Frontend (Astro build)
+2. 🧪 Test Backend (Go tests + build)
+3. 🐳 Build & Push Docker images to GHCR
+4. 🚀 Deploy to VPS via SSH
+5. ✅ Health check verification
 
 ---
 

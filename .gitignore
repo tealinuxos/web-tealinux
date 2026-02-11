@@ -1,6 +1,30 @@
-
+# Environment files
 .env
 **/.env
+.env.production
+.env.local
 
+# Dependencies
 node_modules/
 **/node_modules/
+
+# Build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Docker volumes
+pgdata/
+certbot/
+
+# SSL certificates
+nginx/ssl/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
