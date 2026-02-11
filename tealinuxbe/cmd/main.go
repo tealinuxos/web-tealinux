@@ -27,7 +27,7 @@ func main() {
 	app.Use(logger.New())
 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins:     "http://localhost:4321,http://localhost:4322,http://localhost:4323",
+		AllowOrigins:     "https://tealinuxos.org,http://localhost:4321",
 		AllowMethods:     "GET,POST,PUT,DELETE,OPTIONS",
 		AllowHeaders:     "Origin, Content-Type, Accept, Authorization",
 		AllowCredentials: true,
