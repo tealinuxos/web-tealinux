@@ -8,25 +8,76 @@ interface Props {
 const { currentId } = Astro.props;
 const docs = await getCollection('docs');
 
-// Sort all docs by category and then by order to find neighbors
-const sortedDocs = docs.sort((a, b) => {
-  if (a.data.category !== b.data.category) {
-    return a.data.category.localeCompare(b.data.category);
+// Define the desired category order (same as Sidebar)
+const categoryOrder = [
+  'Welcome to TeaLinuxOS',
+  'Installation',
+  'Live Boot',
+  'Installation Process',
+  'General',
+];
+
+// Define item order within each category (same as Sidebar)
+const itemOrderMap: Record<string, string[]> = {
+  'Welcome to TeaLinuxOS': ['Welcome to TeaLinuxOS', 'What is TeaLinux?', "What's New"],
+  'Installation': ['Installation', 'Requirements', 'Which Edition to Choose', 'Boot TeaLinuxOS', 'Boot in VMs', 'Installation Method'],
+  'Live Boot': ['Create Bootable Media'],
+  'Installation Process': ['About Page', 'Setup Localization', 'Single Boot', 'Dual Boot', 'Manual Partition', 'User Creation', 'Summary', 'Installation Stage'],
+};
+
+// Group docs by category
+const groups = docs.reduce((acc, doc) => {
+  const category = doc.data.category || 'General';
+  if (!acc[category]) {
+    acc[category] = [];
   }
-  return (a.data.order || 0) - (b.data.order || 0);
+  acc[category].push(doc);
+  return acc;
+}, {} as Record<string, typeof docs>);
+
+// Sort categories by desired order
+const sortedCategories = Object.keys(groups).sort((a, b) => {
+  const indexA = categoryOrder.indexOf(a);
+  const indexB = categoryOrder.indexOf(b);
+  if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+  if (indexA === -1) return 1;
+  if (indexB === -1) return -1;
+  return indexA - indexB;
 });
+
+// Build flat list with custom item ordering
+const sortedDocs: typeof docs = [];
+sortedCategories.forEach(category => {
+  const items = groups[category];
+  const order = itemOrderMap[category];
+  
+  if (order) {
+    items.sort((a, b) => {
+      const indexA = order.indexOf(a.data.title);
+      const indexB = order.indexOf(b.data.title);
+      if (indexA === -1 && indexB === -1) return (a.data.order || 0) - (b.data.order || 0);
+      if (indexA === -1) return 1;
+      if (indexB === -1) return -1;
+      return indexA - indexB;
+    });
+  } else {
+    items.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+  }
+  
+  sortedDocs.push(...items);
+});
+
+const getHref = (doc: typeof docs[0]) => `/docs/${doc.id === 'index' ? '' : doc.id}`;
 
 const currentIndex = sortedDocs.findIndex(doc => doc.id === currentId);
 const prevDoc = currentIndex > 0 ? sortedDocs[currentIndex - 1] : null;
 const nextDoc = currentIndex < sortedDocs.length - 1 ? sortedDocs[currentIndex + 1] : null;
-
-const getHref = (id: string) => `/docs/${id === 'index' ? '' : id}`;
 ---
 
 <nav class="flex items-center justify-between gap-4 mt-12 pt-8 border-t border-white/10">
   {prevDoc ? (
     <a 
-      href={getHref(prevDoc.id)}
+      href={getHref(prevDoc)}
       class="flex-1 group p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#54CD4C]/30 transition-all"
     >
       <div class="flex items-center gap-2 text-sm text-slate-400 mb-1">
@@ -45,7 +96,7 @@ const getHref = (id: string) => `/docs/${id === 'index' ? '' : id}`;
 
   {nextDoc ? (
     <a 
-      href={getHref(nextDoc.id)}
+      href={getHref(nextDoc)}
       class="flex-1 group p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 hover:border-[#54CD4C]/30 transition-all text-right"
     >
       <div class="flex items-center justify-end gap-2 text-sm text-slate-400 mb-1">
