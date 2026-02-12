@@ -12,15 +12,7 @@ const { screenshot, name } = Astro.props;
 		<img
 			src={screenshot}
 			alt={`${name} Desktop`}
-			class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/ss:scale-[1.03]"
+			class="w-full h-full object-cover"
 		/>
-		<!-- Play button overlay -->
-		<div class="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 transition-opacity duration-300 group-hover/ss:opacity-100">
-			<div class="w-14 h-14 rounded-full bg-[#54CD4C]/90 flex items-center justify-center backdrop-blur-[4px] shadow-[0_0_30px_rgba(84,205,76,0.4)] pl-1">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-					<polygon points="5 3 19 12 5 21 5 3" />
-				</svg>
-			</div>
-		</div>
 	</div>
 </div>
