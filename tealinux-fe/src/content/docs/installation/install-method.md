@@ -9,9 +9,9 @@ order: 5
 
 TeaLinuxOS can be installed in various ways, depending on your needs and preferences. Below are the primary installation methods available:
 
-- [Guide to Install to tealinuxos on](/documentation/single-boot) Single Boot (see [Single Boot](/documentation/83.single%20boot))
+- [Guide to Install to tealinuxos on](/docs/installation-process/single-boot) Single Boot (see [Single Boot](/docs/installation-process/single-boot))
 
-- [Guide to Install to tealinuxos on](/documentation/dual-boot) Dual Boot (see [Dual Boot](/documentation/84.dual%20boot))
+- [Guide to Install to tealinuxos on](/docs/installation-process/dual-boot) Dual Boot (see [Dual Boot](/docs/installation-process/dual-boot))
 
-- [Guide to Install to tealinuxos on](/documentation/manual-partition) Manual Partition (see [Manual Partition](/documentation/85.Manual%20Partition))
+- [Guide to Install to tealinuxos on](/docs/installation-process/manual-partition) Manual Partition (see [Manual Partition](/docs/installation-process/manual-partition))
 
