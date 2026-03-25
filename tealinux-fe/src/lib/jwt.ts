@@ -1,6 +1,6 @@
 // JWT utility functions using Web Crypto API (no external dependencies)
 
-const JWT_SECRET = import.meta.env.JWT_SECRET || 'tealinux-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET || import.meta.env.JWT_SECRET || 'tealinux-secret-key-change-in-production';
 const JWT_EXPIRES_IN = 7 * 24 * 60 * 60; // 7 days in seconds
 const REFRESH_EXPIRES_IN = 30 * 24 * 60 * 60; // 30 days in seconds
 
@@ -141,7 +141,7 @@ export async function verifyToken(token: string): Promise<JWTPayload> {
     }
 
     // Decode payload
-    const payload: JWTFullPayload = JSON.parse(base64urlDecode(payloadB64));
+    const payload: any = JSON.parse(base64urlDecode(payloadB64));
 
     // Check expiration
     const now = Math.floor(Date.now() / 1000);
@@ -149,11 +149,12 @@ export async function verifyToken(token: string): Promise<JWTPayload> {
         throw new Error('TOKEN_EXPIRED');
     }
 
+    // Handle both Go backend format (id, role) and Astro format (userId, email, role, name)
     return {
-        userId: payload.userId,
-        email: payload.email,
-        role: payload.role,
-        name: payload.name
+        userId: payload.userId || payload.id || 0,
+        email: payload.email || '',
+        role: payload.role || '',
+        name: payload.name || ''
     };
 }
 

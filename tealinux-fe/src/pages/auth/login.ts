@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 
-const BACKEND_URL = import.meta.env.BACKEND_URL || 'http://tealinux-backend:3000';
+const BACKEND_URL = process.env.BACKEND_URL || import.meta.env.BACKEND_URL || 'http://tealinux-backend:3000';
 
 export const POST: APIRoute = async ({ request, cookies }) => {
     try {
@@ -19,7 +19,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         }
 
         // Forward request to Go backend
-        const backendResponse = await fetch(`${BACKEND_URL}/api/auth/login`, {
+        const backendResponse = await fetch(`${BACKEND_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         // Set HttpOnly cookies (more secure than localStorage)
         cookies.set('tealinux_access_token', access_token, {
             httpOnly: true,
-            secure: import.meta.env.PROD,
+            secure: new URL(request.url).protocol === 'https:',
             sameSite: 'lax',
             path: '/',
             maxAge: 60 * 60 * 24 * 7 // 7 days
@@ -53,7 +53,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
         cookies.set('tealinux_refresh_token', refresh_token, {
             httpOnly: true,
-            secure: import.meta.env.PROD,
+            secure: new URL(request.url).protocol === 'https:',
             sameSite: 'lax',
             path: '/',
             maxAge: 60 * 60 * 24 * 30 // 30 days

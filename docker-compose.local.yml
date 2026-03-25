@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  backend:
+    ports:
+      - "3001:3000"
+    environment:
+      - APP_PORT=3000
+      - DB_HOST=postgres
+      - DB_PORT=5432
+
+  frontend:
+    ports:
+      - "4321:4321"
+    environment:
+      - BACKEND_URL=http://tealinux-backend:3000
+    env_file:
+      - ./tealinuxbe/.env.production
