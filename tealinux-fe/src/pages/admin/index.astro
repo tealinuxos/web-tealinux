@@ -2,6 +2,9 @@
 import AdminLayout from '../../layouts/AdminLayout.astro';
 
 export const prerender = false;
+
+// Read token from HttpOnly cookie (server-side) to pass to client JS
+const token = Astro.cookies.get('tealinux_access_token')?.value || '';
 ---
 
 <AdminLayout title="Downloads - Admin Dashboard">
@@ -148,6 +151,13 @@ export const prerender = false;
     </div>
   </div>
 </AdminLayout>
+
+<!-- Pass token from server to client localStorage (runs before module scripts) -->
+<script is:inline define:vars={{ token }}>
+  if (token) {
+    localStorage.setItem('tealinux_token', token);
+  }
+</script>
 
 <script>
   import { getDownloadStats } from '../../lib/api';
