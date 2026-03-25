@@ -131,6 +131,9 @@ const { title = "Admin Dashboard - TeaLinuxOS" } = Astro.props;
       document.getElementById('logoutBtn')?.addEventListener('click', async () => {
         try {
           await fetch('/auth/logout', { method: 'POST' });
+          localStorage.removeItem('tealinux_token');
+          localStorage.removeItem('tealinux_refresh_token');
+          localStorage.removeItem('tealinux_user');
           window.location.href = '/login';
         } catch (error) {
           console.error('[Admin] Logout failed:', error);

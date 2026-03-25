@@ -171,6 +171,15 @@ export const prerender = true;
 				message.classList.add('success');
 			}
 
+			// Save tokens and user to localStorage for client-side API calls
+			if (result.tokens) {
+				localStorage.setItem('tealinux_token', result.tokens.accessToken);
+				localStorage.setItem('tealinux_refresh_token', result.tokens.refreshToken);
+			}
+			if (result.user) {
+				localStorage.setItem('tealinux_user', JSON.stringify(result.user));
+			}
+
 			// Redirect after successful login
 			setTimeout(() => {
 				const redirectUrl = redirect || (result.user.role === 'admin' ? '/admin' : '/');
