@@ -7,7 +7,7 @@ order: 2
 
 # Choose the right edition
 
-You can [download](https://pinguin.dinus.ac.id/iso/tealinuxos/TeaLinuxOS-Arch/2025/release/) TeaLinuxOS in two different editions, each tailored to different user needs and preferences.
+You can [download](https://pinguin.dinus.ac.id/iso/tealinuxos/TeaLinuxOS-Arch/2026/release/) TeaLinuxOS in two different editions, each tailored to different user needs and preferences.
 
 ## TeaLinuxOS Edition
 

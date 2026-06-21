@@ -35,13 +35,13 @@ const editions: Record<string, {
   },
   plasma: {
     name: 'TeaLinux Plasma',
-    codename: 'Celia',
+    codename: 'Lilya',
     basedOn: 'Arch Linux',
     kernelVersion: '6.19.11',
-    releaseDate: '2025-06-14',
+    releaseDate: '2026-06-20',
     desktopEnvironment: 'KDE Plasma 6',
     size: '~2.0 GiB',
-    downloadUrl: 'https://pinguin.dinus.ac.id/iso/tealinuxos/TeaLinuxOS-Arch/2025/release/tealinux-celia-plasma-2025.10.24-x86_64.iso',
+    downloadUrl: 'https://pinguin.dinus.ac.id/iso/tealinuxos/TeaLinuxOS-Arch/2026/release/tealinux-lilya-plasma-2026.06.20-x86_64.iso',
     screenshot: '/img/kde1_copy.webp',
     displayServer: 'X11 / Wayland',
     features: ['KDE Plasma 6', 'Full customization support', 'Beautiful, user-friendly interface', 'Extensive widget ecosystem'],
@@ -123,8 +123,8 @@ if (!data) {
               </svg>
               <span>Direct Download</span>
             </button>
-            <p class="text-xs text-slate-500 m-0">
-              File: tealinux-celia-{edition}-x86_64.iso • {data.size}
+             <p class="text-xs text-slate-500 m-0">
+              File: {data.downloadUrl.split('/').pop()} • {data.size}
             </p>
           </div>
         </EditionCard>
