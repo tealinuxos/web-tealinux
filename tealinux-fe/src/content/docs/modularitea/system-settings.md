@@ -7,7 +7,7 @@ order: 6
 
 # System Settings
 
-The System Settings page in Modularitea provides centralized access to key system configuration options. Access it by clicking the **Settings** button (⚙️) at the bottom of the sidebar.
+The System Settings page in Modularitea provides centralized access to key system configuration options. Access it by clicking the **Settings** button () at the bottom of the sidebar.
 
 The settings panel is organized into a responsive grid layout with the following modules:
 

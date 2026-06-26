@@ -129,28 +129,6 @@ This approach is safer than running the entire application as root, because only
 
 ---
 
-## Profile TOML Format
-
-Profiles are defined as `.toml` files in the `profiles/` directory. Here is the complete schema:
-
-```toml
-[meta]
-name = "Profile Display Name"          # Required: Human-readable name
-description = "What this profile does" # Required: Brief description
-version = "1.0.0"                      # Required: Semantic version
-author = "TeaLinuxOS Team"             # Required: Author name
-category = "development"               # Required: Category identifier
-icon = "icon_name.svg"                 # Optional: Icon filename
-
-[packages]
-install = ["pkg1", "pkg2", "pkg3"]     # Packages from official repos
-aur = ["aur-pkg1", "aur-pkg2"]         # Packages from the AUR
-
-[services]
-enable = ["service1", "service2"]      # Systemd services to enable
-```
-
----
 
 ## Example: Installing a Web Development Environment
 

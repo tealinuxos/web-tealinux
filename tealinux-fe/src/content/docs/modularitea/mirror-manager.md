@@ -53,7 +53,7 @@ This process typically takes **30–60 seconds** depending on your internet conn
 ### Step-by-Step
 
 1. Open **Modularitea**.
-2. Click the **Settings** button (⚙️) at the bottom of the sidebar.
+2. Click the **Settings** button gear  at the bottom of the sidebar.
 3. Locate the **Mirror Settings** card in the settings grid.
 4. Optionally, select a **country** to prioritize mirrors geographically close to you (e.g., "Indonesia").
 5. Click the **Refresh Mirror** button.

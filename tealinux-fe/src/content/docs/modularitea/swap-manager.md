@@ -73,7 +73,7 @@ ZRAM swap works by creating a compressed region in RAM. For example, with a 2:1 
 ### Checking Swap Status
 
 1. Open **Modularitea**.
-2. Click the **Settings** button (⚙️) at the bottom of the sidebar.
+2. Click the **Settings** button () at the bottom of the sidebar.
 3. Locate the **Swap Memory** card.
 4. The card displays the current swap status: **Enabled** or **Disabled**.
 
@@ -149,8 +149,8 @@ Creating and removing files in `/etc/systemd/` and manipulating block devices re
 
 ## Warnings
 
-> **⚠️ Risk of system instability.** Disabling swap on a system with limited RAM (4 GB or less) may cause the Linux OOM (Out of Memory) killer to terminate running applications without warning. This can result in data loss. Only disable swap if you have sufficient RAM for your workload.
+> ** Risk of system instability.** Disabling swap on a system with limited RAM (4 GB or less) may cause the Linux OOM (Out of Memory) killer to terminate running applications without warning. This can result in data loss. Only disable swap if you have sufficient RAM for your workload.
 
-> **⚠️ ZRAM uses RAM.** While ZRAM is faster than disk swap, it still uses a portion of your physical RAM for the compressed block device. On very low-RAM systems (2 GB), enabling ZRAM swap may slightly reduce the RAM available for applications, though the net effect of compression is usually positive.
+> ** ZRAM uses RAM.** While ZRAM is faster than disk swap, it still uses a portion of your physical RAM for the compressed block device. On very low-RAM systems (2 GB), enabling ZRAM swap may slightly reduce the RAM available for applications, though the net effect of compression is usually positive.
 
-> **⚠️ Changes are persistent.** Enabling or disabling swap through Modularitea is a persistent change that survives reboots. You do not need to toggle swap again after restarting your system.
+> ** Changes are persistent.** Enabling or disabling swap through Modularitea is a persistent change that survives reboots. You do not need to toggle swap again after restarting your system.
